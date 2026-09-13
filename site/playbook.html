@@ -1,0 +1,362 @@
+<title>The Disease-Free Gate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F6F1E7; --surface:#FDFBF5; --surface-2:#EFE7D6; --inset:#F1EADB;
+  --ink:#241E17; --ink-2:#6E6353; --ink-3:#948976; --hairline:#E1D8C5; --hairline-2:#D3C7AE;
+  --beef:#A8321E; --rail:#1D6FA5; --pasture:#4E7A3A; --plum:#8A3E86; --ochre:#B8841E;
+  --beef-soft:#EBD6CF; --rail-soft:#D5E4EE; --pasture-soft:#DCE6D2; --plum-soft:#E9DBE8; --ochre-soft:#F0E4C8;
+  --s1:#E7C77A; --s2:#D8A24A; --s3:#C67C2C; --s4:#B15A22; --s5:#9C3E1C; --s6:#822C17;
+  --shadow:0 1px 2px rgba(40,30,15,.06),0 8px 26px rgba(40,30,15,.07);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --pasture-soft:#1E2C16; --plum-soft:#2E1E2C; --ochre-soft:#33290F;
+  --s1:#6E5C2E; --s2:#8A6A2A; --s3:#A9722B; --s4:#C06238; --s5:#D06A4A; --s6:#DB6048;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --pasture-soft:#1E2C16; --plum-soft:#2E1E2C; --ochre-soft:#33290F;
+  --s1:#6E5C2E; --s2:#8A6A2A; --s3:#A9722B; --s4:#C06238; --s5:#D06A4A; --s6:#DB6048;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto;font-size:18px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:22px;}
+.col{max-width:720px;}
+h1,h2,h3,.display{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:800;line-height:1.03;letter-spacing:-.015em;text-wrap:balance;margin:0;}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);}
+a{color:var(--rail);text-underline-offset:2px;}
+p{margin:0 0 1.1em;}
+strong{font-weight:600;color:var(--ink);}
+sup{font-size:.62em;font-weight:600;color:var(--ochre);font-family:"IBM Plex Mono",monospace;padding-left:1px;line-height:0;}
+.mast{position:relative;overflow:hidden;border-bottom:1px solid var(--hairline);}
+.mast-inner{padding-block:60px 38px;position:relative;z-index:2;}
+.kicker{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px;}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--hairline-2);border-radius:100px;padding:5px 11px;}
+.brandtag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);font-weight:600;}
+.mast h1{font-size:clamp(34px,6vw,68px);margin:0;color:var(--ink);}
+.mast h1 .em{color:var(--beef);}
+.dek{font-size:clamp(18px,2.3vw,23px);line-height:1.42;color:var(--ink-2);max-width:36ch;margin:20px 0 0;font-weight:400;}
+.byline{margin-top:26px;display:flex;gap:24px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);letter-spacing:.02em;}
+.byline b{color:var(--ink);font-weight:600;}
+.mast-fig{position:absolute;inset:0;z-index:1;opacity:.9;}
+section{padding-block:56px;border-bottom:1px solid var(--hairline);}
+.sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:10px;}
+.sec-num{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;color:var(--beef);letter-spacing:.05em;flex:none;padding-top:6px;}
+.sec-head h2{font-size:clamp(26px,3.8vw,38px);margin:0;}
+.standfirst{font-size:20px;line-height:1.5;color:var(--ink);max-width:44ch;margin:0 0 26px;}
+.standfirst .em{color:var(--beef);font-weight:600;}
+.col p{color:var(--ink-2);}
+.col p strong{color:var(--ink);}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:14px;overflow:hidden;margin:8px 0 4px;}
+.tile{background:var(--surface);padding:20px 20px 18px;}
+.tile .n{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:33px;line-height:1;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+.tile .n .u{font-size:16px;color:var(--ink-2);font-weight:600;margin-left:2px;}
+.tile .l{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);margin-top:9px;line-height:1.35;}
+.tile.hot .n{color:var(--beef);}
+figure{margin:30px 0 6px;}
+.panel{background:var(--surface);border:1px solid var(--hairline);border-radius:16px;padding:26px 26px 20px;box-shadow:var(--shadow);}
+figcaption{font-size:14.5px;color:var(--ink-2);line-height:1.5;margin-top:14px;}
+figcaption b{color:var(--ink);font-weight:600;}
+.fig-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em;color:var(--ink);margin-bottom:2px;}
+.fig-sub{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;}
+svg{display:block;max-width:100%;height:auto;overflow:visible;}
+text{font-family:"IBM Plex Mono",monospace;}
+.axis{fill:var(--ink-3);font-size:12px;}
+.axlabel{fill:var(--ink);font-size:12.5px;font-weight:500;}
+.axval{fill:var(--ink);font-size:13px;font-weight:600;}
+.grid{stroke:var(--hairline);stroke-width:1;}
+.baseline{stroke:var(--hairline-2);stroke-width:1.5;}
+.b-beef{fill:var(--beef);} .b-rail{fill:var(--rail);} .b-pasture{fill:var(--pasture);} .b-plum{fill:var(--plum);} .b-ochre{fill:var(--ochre);} .b-mute{fill:var(--ink-3);}
+.s1{fill:var(--s1)} .s2{fill:var(--s2)} .s3{fill:var(--s3)} .s4{fill:var(--s4)} .s5{fill:var(--s5)} .s6{fill:var(--s6)}
+.note{border-left:3px solid var(--ochre);background:var(--ochre-soft);border-radius:0 10px 10px 0;padding:16px 20px;margin:26px 0;font-size:16px;line-height:1.5;color:var(--ink);}
+.note .h{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);font-weight:600;display:block;margin-bottom:6px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px;align-items:start;margin-top:30px;}
+.grid2 h3{font-size:19px;margin:0 0 6px;}
+.grid2 p{font-size:16px;color:var(--ink-2);}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px;}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--inset);border:1px solid var(--hairline);border-radius:7px;padding:5px 10px;color:var(--ink-2);}
+.chip b{color:var(--ink);font-weight:600;}
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;}
+.phase{background:var(--surface);border:1px solid var(--hairline);border-radius:14px;padding:20px;}
+.phase .pt{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;color:var(--ink-3);}
+.phase .py{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:27px;color:var(--beef);margin:6px 0 2px;letter-spacing:-.02em;}
+.phase .pn{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:12px;}
+.phase ul{margin:0;padding-left:17px;font-size:14.5px;color:var(--ink-2);line-height:1.5;}
+.phase li{margin-bottom:6px;} .phase li::marker{color:var(--ochre);}
+.srcs{columns:2;column-gap:40px;font-size:13.5px;line-height:1.5;color:var(--ink-2);}
+.srcs li{break-inside:avoid;margin-bottom:11px;} .srcs a{color:var(--rail);}
+.disclaimer{font-size:13px;color:var(--ink-3);line-height:1.5;max-width:66ch;margin-top:24px;font-style:italic;}
+.foot{padding-block:32px 58px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;}
+.foot a{color:var(--rail);}
+@media (max-width:780px){body{font-size:17px;}.grid2{grid-template-columns:1fr;}.phases{grid-template-columns:1fr;}.srcs{columns:1;}section{padding-block:44px;}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+
+.ladreq{fill:var(--ink-3);font-size:10.5px;}
+</style>
+
+<div class="mast">
+  <svg class="mast-fig" viewBox="0 0 1140 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect width="1140" height="340" fill="var(--pasture)" opacity="0.05"></rect>
+    <path d="M-20 250 Q 340 130 640 160 T 1200 90" fill="none" stroke="var(--pasture)" stroke-width="1.4" stroke-opacity=".28" stroke-dasharray="2 7"></path>
+    <path d="M-20 300 Q 300 250 620 210 T 1200 160" fill="none" stroke="var(--ochre)" stroke-width="1.4" stroke-opacity=".24" stroke-dasharray="2 7"></path>
+  </svg>
+  <div class="wrap mast-inner">
+    <div class="kicker">
+      <span class="brandtag">◆ Mutambo Research</span>
+      <span class="tag">Beef Series · 03</span>
+      <span class="tag">Animal Health &amp; Market Access</span>
+    </div>
+    <h1>The <span class="em">disease-free</span> gate</h1>
+    <p class="dek">Premium markets don't buy tonnage. They buy freedom from disease, proven by zoning and traceability. This is the cheapest, highest-leverage step in the whole $10B plan — and the one nothing else can substitute for.</p>
+    <div class="byline">
+      <span><b>The gate</b>&nbsp;&nbsp;FMD · CBPP · traceability</span>
+      <span><b>Models</b>&nbsp;&nbsp;Botswana zones · Namibia Red Line</span>
+      <span><b>Cost</b>&nbsp;&nbsp;≈ $1.8B — and it unlocks everything</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- 01 -->
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><h2>Market access is a veterinary certificate</h2></div>
+  <div class="col">
+    <p class="standfirst">A buyer in Hamburg or Jeddah never tastes the beef before deciding. They read a <span class="em">certificate</span> — proof the animal came from a place free of foot-and-mouth, with a traceable history from birth to box.</p>
+    <p>That certificate is the difference between selling live cattle into the DRC at commodity prices and selling chilled cuts into the EU at a premium. Every rung of the price ladder below is gated by a veterinary requirement, not a marketing budget. Zambia is currently stuck near the bottom rung — not because its beef is poor, but because it cannot yet <em>prove</em> disease freedom.</p>
+  </div>
+
+  <figure>
+    <div class="panel">
+      <div class="fig-title">The price ladder is a disease-control ladder</div>
+      <div class="fig-sub">Indicative realised price by market · US$ / tonne · gated by veterinary requirement</div>
+      <svg viewBox="0 0 720 268" role="img" aria-label="Realised beef price rises with disease-control requirements: regional 4000, COMESA 4800, Gulf halal 5500, China 6000, EU 6800 dollars per tonne">
+        <line class="grid" x1="200" y1="12" x2="200" y2="236"></line>
+        <line class="grid" x1="349" y1="12" x2="349" y2="236"></line>
+        <line class="grid" x1="497" y1="12" x2="497" y2="236"></line>
+        <line class="grid" x1="646" y1="12" x2="646" y2="236"></line>
+        <text class="axis" x="200" y="252" text-anchor="middle">$2k</text>
+        <text class="axis" x="349" y="252" text-anchor="middle">$4k</text>
+        <text class="axis" x="497" y="252" text-anchor="middle">$6k</text>
+        <text class="axis" x="646" y="252" text-anchor="middle">$8k</text>
+        <!-- scale: 0..8000 over x150..690 (540px) px/1000=67.5. bars start at x150 -->
+        <!-- Regional 4000 -> w270 -->
+        <text class="axlabel" x="142" y="34" text-anchor="end">Regional · DRC</text>
+        <text class="ladreq" x="142" y="47" text-anchor="end">basic health certificate</text>
+        <rect class="s2" x="150" y="24" width="270" height="28" rx="4"></rect>
+        <text class="axval" x="428" y="43">$4,000</text>
+        <!-- COMESA 4800 -> 324 -->
+        <text class="axlabel" x="142" y="80" text-anchor="end">COMESA / SADC</text>
+        <text class="ladreq" x="142" y="93" text-anchor="end">SPS basics</text>
+        <rect class="s3" x="150" y="70" width="324" height="28" rx="4"></rect>
+        <text class="axval" x="482" y="89">$4,800</text>
+        <!-- Gulf 5500 -> 371 -->
+        <text class="axlabel" x="142" y="126" text-anchor="end">Gulf · halal</text>
+        <text class="ladreq" x="142" y="139" text-anchor="end">halal + traceability</text>
+        <rect class="s4" x="150" y="116" width="371" height="28" rx="4"></rect>
+        <text class="axval" x="529" y="135">$5,500</text>
+        <!-- China 6000 -> 405 -->
+        <text class="axlabel" x="142" y="172" text-anchor="end">China</text>
+        <text class="ladreq" x="142" y="185" text-anchor="end">bilateral protocol + plant</text>
+        <rect class="s5" x="150" y="162" width="405" height="28" rx="4"></rect>
+        <text class="axval" x="563" y="181">$6,000</text>
+        <!-- EU 6800 -> 459 -->
+        <text class="axlabel" x="142" y="218" text-anchor="end">EU / premium</text>
+        <text class="ladreq" x="142" y="231" text-anchor="end">WOAH free zone + full trace</text>
+        <rect class="s6" x="150" y="208" width="459" height="28" rx="4"></rect>
+        <text class="axval" x="617" y="227">$6,800</text>
+      </svg>
+    </div>
+    <figcaption><b>The prize for passing the gate is ~70% more per tonne.</b> Darker bars demand stricter proof. Zambia's first exports (live/chilled to the DRC) sit on the bottom rung; every rung up requires a heavier veterinary and traceability foundation.<sup>1,2</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><h2>Where Zambia actually stands</h2></div>
+  <div class="col">
+    <p class="standfirst">Better than the reputation suggests on one disease — worse on the one that matters most for premium access.</p>
+    <p>On <strong>CBPP</strong> (contagious bovine pleuropneumonia), Zambia is a regional leader: it and Namibia are the <strong>only two countries with a WOAH-endorsed official CBPP control programme</strong>, and a 2024 campaign vaccinated <strong>198,214 cattle</strong> in Western Province, which has since recorded no new CBPP or anthrax outbreaks.<sup>3</sup> On <strong>foot-and-mouth</strong>, the picture is harder: FMD has circulated since 1933, an outbreak hit Kaoma (Western Province) in 2023, and Zambia holds <em>no</em> WOAH-recognised FMD-free zone.<sup>3,4</sup></p>
+  </div>
+  <figure>
+    <div class="tiles">
+      <div class="tile"><div class="n">2<span class="u"> of 2</span></div><div class="l">WOAH-endorsed CBPP programmes in the world — Zambia is one</div></div>
+      <div class="tile"><div class="n">198k</div><div class="l">Cattle vaccinated vs CBPP, Western Prov., 2024</div></div>
+      <div class="tile hot"><div class="n">0</div><div class="l">WOAH-recognised FMD-free zones today</div></div>
+      <div class="tile"><div class="n">1933</div><div class="l">First FMD record — Western Province</div></div>
+    </div>
+    <figcaption><b>The gap is FMD zoning + traceability, not veterinary competence.</b> Zambia already runs continental-standard disease programmes; what it lacks is the <em>recognised geography</em> and the animal-level trace that premium buyers require.</figcaption>
+  </figure>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><h2>Two proven models next door</h2></div>
+  <div class="col">
+    <p class="standfirst">Southern Africa already solved this twice. Zambia can copy the parts that fit and skip the parts that don't.</p>
+  </div>
+  <div class="grid2">
+    <div>
+      <h3 style="color:var(--rail)">Botswana — zones + traceability</h3>
+      <p>A national Livestock Identification &amp; Traceability System (LITS) plus disease-control zones and cordon fences earned Botswana a standing <strong>EU quota of 18,916 tonnes</strong>, routed through the Botswana Meat Commission. The lesson: <strong>animal-level traceability</strong> is the passport — every beast individually registered, its movements logged.<sup>5</sup></p>
+    </div>
+    <div>
+      <h3 style="color:var(--beef)">Namibia — the Red Line + CBT</h3>
+      <p>Namibia's Veterinary Cordon Fence (the "Red Line") separates a <strong>WOAH-recognised FMD-free zone</strong> in the south — where vaccination is banned — from the vaccinated north. That zone exports to the EU, UK and Norway. Namibia also pioneered <strong>commodity-based trade</strong>: deboning + maturation + pH control that makes even beef from riskier zones safe to trade.<sup>1,2</sup></p>
+    </div>
+  </div>
+  <div class="note">
+    <span class="h">The hybrid Zambia should build</span>
+    Fencing an entire country is prohibitively expensive (Zambia has always judged so). So lead with <strong>compartments</strong> — closed, audited feedlot-to-abattoir systems that earn disease-free status fast — and <strong>commodity-based trade</strong> for deboned beef, while building the <strong>protection and surveillance zones</strong> around the Southern export cluster that a full WOAH free-zone dossier needs later.
+  </div>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><h2>The map: a clean core, a managed west</h2></div>
+  <div class="col">
+    <p class="standfirst">Geography does half the work. The export herd and the disease risk sit in <span class="em">different</span> places — so protect the clean core first and manage the west behind vaccination.</p>
+  </div>
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Zoning the beef map</div>
+      <div class="fig-sub">Schematic — protection zone &amp; compartments vs. the western vaccination zone</div>
+      <svg viewBox="0 0 720 320" role="img" aria-label="A clean export protection zone over Southern and Central Zambia with compartments, separated by a buffer from the Western FMD vaccination zone, with export arrows to Dar and Lobito">
+        <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--ink-3)"></path></marker></defs>
+        <!-- clean zone -->
+        <rect x="250" y="70" width="392" height="180" rx="16" fill="var(--pasture)" opacity="0.10"></rect>
+        <rect x="250" y="70" width="392" height="180" rx="16" fill="none" stroke="var(--pasture)" stroke-width="1.6" stroke-dasharray="5 5"></rect>
+        <text x="266" y="94" fill="var(--pasture)" font-size="11.5" font-weight="600" letter-spacing="0.08em">PROTECTION / SURVEILLANCE ZONE + COMPARTMENTS</text>
+        <g font-size="12" font-weight="600">
+          <circle cx="320" cy="180" r="7" fill="var(--beef)"></circle><text class="axlabel" x="320" y="200" text-anchor="middle">Kalomo</text>
+          <circle cx="405" cy="150" r="8" fill="var(--beef)"></circle><text class="axlabel" x="405" y="140" text-anchor="middle">Choma · Monze</text>
+          <circle cx="500" cy="130" r="6" class="b-mute"></circle><text class="axlabel" x="500" y="120" text-anchor="middle">Lusaka</text>
+          <circle cx="585" cy="110" r="7" fill="var(--ochre)"></circle><text class="axlabel" x="585" y="100" text-anchor="middle">Kapiri ⟂</text>
+        </g>
+        <text x="405" y="228" fill="var(--pasture)" font-size="10.5" text-anchor="middle">no vaccination · WOAH free-zone candidate</text>
+        <!-- buffer -->
+        <rect x="210" y="70" width="40" height="180" fill="var(--ochre)" opacity="0.10"></rect>
+        <text x="230" y="160" fill="var(--ink-3)" font-size="10" text-anchor="middle" transform="rotate(-90 230 160)">BUFFER</text>
+        <!-- western zone -->
+        <rect x="40" y="120" width="170" height="150" rx="16" fill="var(--ochre)" opacity="0.13"></rect>
+        <rect x="40" y="120" width="170" height="150" rx="16" fill="none" stroke="var(--ochre)" stroke-width="1.6" stroke-dasharray="5 5"></rect>
+        <text x="56" y="144" fill="var(--ochre)" font-size="11" font-weight="600" letter-spacing="0.06em">WESTERN FMD /</text>
+        <text x="56" y="159" fill="var(--ochre)" font-size="11" font-weight="600" letter-spacing="0.06em">CBPP VAX ZONE</text>
+        <circle cx="125" cy="210" r="8" fill="var(--plum)"></circle><text class="axlabel" x="125" y="230" text-anchor="middle">Mongu · Kaoma</text>
+        <!-- gated arrow west->clean -->
+        <path d="M170 210 L250 195" fill="none" stroke="var(--ink-3)" stroke-width="1.6" stroke-dasharray="3 4" marker-end="url(#ar)"></path>
+        <text x="205" y="188" fill="var(--ink-3)" font-size="9.5" text-anchor="middle">vaccinated +</text>
+        <text x="205" y="199" fill="var(--ink-3)" font-size="9.5" text-anchor="middle">quarantined only</text>
+        <!-- exports -->
+        <path d="M642 120 C 675 105 690 100 706 92" fill="none" stroke="var(--rail)" stroke-width="3" marker-end="url(#ar)"></path>
+        <text x="662" y="150" fill="var(--rail)" font-size="11" font-weight="600" text-anchor="end">→ Dar · Gulf · EU</text>
+        <path d="M405 70 C 300 34 130 44 40 92" fill="none" stroke="var(--beef)" stroke-width="2.4" marker-end="url(#ar)"></path>
+        <text x="120" y="70" fill="var(--beef)" font-size="11" font-weight="600" text-anchor="middle">Lobito → Atlantic</text>
+      </svg>
+    </div>
+    <figcaption><b>Schematic — not to scale.</b> The export herd's core (Kalomo–Choma–Monze) becomes a vaccination-free protection zone and WOAH free-zone candidate; the western herd stays productive behind vaccination and enters the clean chain only after quarantine. Compartments inside the core earn export status first.<sup>4,5</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 05 -->
+<section>
+  <div class="sec-head"><span class="sec-num">05</span><h2>What it costs to build the gate</h2></div>
+  <div class="col">
+    <p class="standfirst">Around <span class="em">US$1.8 billion</span> across the full program — a rounding error against the $10B prize, and the precondition for reaching it.</p>
+    <p>The largest line is the traceability spine: individually tagging and registering a herd that grows from ~5M to ~40M head, with readers, a national database, and movement permits. Everything else — recurring vaccination, cordon and quarantine infrastructure, veterinary and laboratory capacity, abattoir certification, and the WOAH dossiers themselves — is comparatively modest.</p>
+  </div>
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Disease-control &amp; traceability capital</div>
+      <div class="fig-sub">Cumulative over the program · US$ billion · order-of-magnitude · total ≈ $1.8B</div>
+      <svg viewBox="0 0 720 196" role="img" aria-label="Cost stack: LITS and eartags 0.5B, vaccination 0.4B, cordon and quarantine 0.35B, vet and lab 0.3B, abattoir certification 0.15B, WOAH dossiers 0.1B, total about 1.8B">
+        <rect class="s6" x="40" y="40" width="177.8" height="46" rx="3"></rect>
+        <rect class="s5" x="219.8" y="40" width="142.2" height="46" rx="3"></rect>
+        <rect class="s4" x="364" y="40" width="124.5" height="46" rx="3"></rect>
+        <rect class="s3" x="490.5" y="40" width="106.7" height="46" rx="3"></rect>
+        <rect class="s2" x="599.2" y="40" width="53.3" height="46" rx="3"></rect>
+        <rect class="s1" x="654.5" y="40" width="35.6" height="46" rx="3"></rect>
+        <g font-size="12">
+          <line x1="128.9" y1="90" x2="128.9" y2="100" class="grid"></line>
+          <text class="axval" x="128.9" y="34" text-anchor="middle">$0.5B</text>
+          <text class="axlabel" x="128.9" y="116" text-anchor="middle">LITS + eartags</text>
+          <line x1="290.9" y1="90" x2="290.9" y2="100" class="grid"></line>
+          <text class="axval" x="290.9" y="34" text-anchor="middle">$0.4B</text>
+          <text class="axlabel" x="290.9" y="116" text-anchor="middle">Vaccination</text>
+          <line x1="426.2" y1="90" x2="426.2" y2="100" class="grid"></line>
+          <text class="axval" x="426.2" y="34" text-anchor="middle">$0.35B</text>
+          <text class="axlabel" x="426.2" y="134" text-anchor="middle">Cordon + quarantine</text>
+          <line x1="543.8" y1="90" x2="543.8" y2="100" class="grid"></line>
+          <text class="axlabel" x="543.8" y="152" text-anchor="middle">Vet + lab · $0.3B</text>
+          <line x1="654" y1="90" x2="654" y2="100" class="grid"></line>
+          <text class="axlabel" x="690" y="170" text-anchor="end">Abattoir cert $0.15B · WOAH $0.1B</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Split is illustrative.</b> This is the cheapest billion-plus in the entire beef build — and uniquely, no other spending substitutes for it. Fund it first, through animal-health DFIs, SADC/WOAH programmes, and the traceability levy premium buyers effectively pay for.</figcaption>
+  </figure>
+</section>
+
+<!-- 06 -->
+<section>
+  <div class="sec-head"><span class="sec-num">06</span><h2>The timeline to recognition</h2></div>
+  <div class="col">
+    <p class="standfirst">Recognition is earned in sequence — fast wins first, the formal free-zone dossier last.</p>
+  </div>
+  <div class="phases">
+    <div class="phase">
+      <div class="pt">FAST</div><div class="py">2–3 yrs</div><div class="pn">Compartments + CBT</div>
+      <ul>
+        <li>Audited feedlot-to-abattoir compartments in the clean core</li>
+        <li>Commodity-based trade for deboned, matured beef</li>
+        <li>LITS pilot across the Southern export cluster</li>
+        <li>Unlocks Gulf/halal and regional premium volume</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="pt">MEDIUM</div><div class="py">3–5 yrs</div><div class="pn">Protection zone</div>
+      <ul>
+        <li>Vaccination-free protection + surveillance zone in the core</li>
+        <li>Buffer management along the western boundary</li>
+        <li>National LITS coverage &amp; movement control</li>
+        <li>China protocol &amp; approved establishments</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="pt">LONG</div><div class="py">5–8 yrs</div><div class="pn">WOAH free zone</div>
+      <ul>
+        <li>Formal WOAH FMD-free-zone (without vaccination) dossier</li>
+        <li>Full EU establishment approval</li>
+        <li>Western Province integrated behind sustained control</li>
+        <li>Zambia joins the recognised free-zone club</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section>
+  <div class="sec-head"><span class="sec-num">✦</span><h2>Sources &amp; notes</h2></div>
+  <ol class="srcs">
+    <li>The Namibian / LAC — <a href="https://www.namibian.com.na/the-infamous-redline-why-does-namibia-have-a-veterinary-cordon-fence/">Namibia's Veterinary Cordon Fence ("Red Line")</a>; WOAH-recognised FMD-free zone south of the VCF.</li>
+    <li>WOAH / Ausvet — commodity-based trade (CBT) and zonation for FMD-safe trade; <a href="https://ausvet.com.au/projects/namibia-freedom/">Namibia freedom-from-disease work</a>.</li>
+    <li>WOAH-Africa &amp; Ministry of Fisheries and Livestock — <a href="https://rr-africa.woah.org/en/projects/gf-tads-for-africa/contagious-bovine-pleuropneumonia/">CBPP control programme</a>; <a href="https://www.mfl.gov.zm/?p=2171">FMD control measures, Western Province</a> (198,214 cattle vaccinated, 2024).</li>
+    <li>Wiley Vet. Medicine International — <a href="https://onlinelibrary.wiley.com/doi/10.1155/2014/373921">FMD control in Zambia</a> (history, endemic zones).</li>
+    <li>TIPS — <a href="https://www.tips.org.za/files/sadrn_policy_brief_4_-_effects_of_eu_traceback_system_botswana_0.pdf">EU traceback system &amp; Botswana</a>; BMC / LITS / EU quota (18,916 t).</li>
+  </ol>
+  <p class="disclaimer">Independent research and scenario analysis, not a government or veterinary-authority plan. Market prices, the zoning map, the cost split and the recognition timeline are illustrative order-of-magnitude values built on the cited public data and standard SPS/WOAH practice. Part of the Mutambo Research beef series. Prepared September 2026.</p>
+</section>
+
+</main>
+<div class="foot wrap">MUTAMBO RESEARCH · ZAMBIA BEEF SERIES · 03 · THE DISEASE-FREE GATE</div>

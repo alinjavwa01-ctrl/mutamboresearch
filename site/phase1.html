@@ -1,0 +1,333 @@
+<title>The First Beef Billion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F6F1E7; --surface:#FDFBF5; --surface-2:#EFE7D6; --inset:#F1EADB;
+  --ink:#241E17; --ink-2:#6E6353; --ink-3:#948976; --hairline:#E1D8C5; --hairline-2:#D3C7AE;
+  --beef:#A8321E; --rail:#1D6FA5; --pasture:#4E7A3A; --plum:#8A3E86; --ochre:#B8841E;
+  --beef-soft:#EBD6CF; --rail-soft:#D5E4EE; --pasture-soft:#DCE6D2; --plum-soft:#E9DBE8; --ochre-soft:#F0E4C8;
+  --s1:#E7C77A; --s2:#D8A24A; --s3:#C67C2C; --s4:#B15A22; --s5:#9C3E1C; --s6:#822C17;
+  --shadow:0 1px 2px rgba(40,30,15,.06),0 8px 26px rgba(40,30,15,.07);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --pasture-soft:#1E2C16; --plum-soft:#2E1E2C; --ochre-soft:#33290F;
+  --s1:#6E5C2E; --s2:#8A6A2A; --s3:#A9722B; --s4:#C06238; --s5:#D06A4A; --s6:#DB6048;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --pasture-soft:#1E2C16; --plum-soft:#2E1E2C; --ochre-soft:#33290F;
+  --s1:#6E5C2E; --s2:#8A6A2A; --s3:#A9722B; --s4:#C06238; --s5:#D06A4A; --s6:#DB6048;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto;font-size:18px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:22px;}
+.col{max-width:720px;}
+h1,h2,h3,.display{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:800;line-height:1.03;letter-spacing:-.015em;text-wrap:balance;margin:0;}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);}
+a{color:var(--rail);text-underline-offset:2px;}
+p{margin:0 0 1.1em;}
+strong{font-weight:600;color:var(--ink);}
+sup{font-size:.62em;font-weight:600;color:var(--ochre);font-family:"IBM Plex Mono",monospace;padding-left:1px;line-height:0;}
+.mast{position:relative;overflow:hidden;border-bottom:1px solid var(--hairline);}
+.mast-inner{padding-block:60px 38px;position:relative;z-index:2;}
+.kicker{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px;}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--hairline-2);border-radius:100px;padding:5px 11px;}
+.brandtag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);font-weight:600;}
+.mast h1{font-size:clamp(34px,6vw,68px);margin:0;color:var(--ink);}
+.mast h1 .em{color:var(--beef);}
+.dek{font-size:clamp(18px,2.3vw,23px);line-height:1.42;color:var(--ink-2);max-width:36ch;margin:20px 0 0;font-weight:400;}
+.byline{margin-top:26px;display:flex;gap:24px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);letter-spacing:.02em;}
+.byline b{color:var(--ink);font-weight:600;}
+.mast-fig{position:absolute;inset:0;z-index:1;opacity:.9;}
+section{padding-block:56px;border-bottom:1px solid var(--hairline);}
+.sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:10px;}
+.sec-num{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;color:var(--beef);letter-spacing:.05em;flex:none;padding-top:6px;}
+.sec-head h2{font-size:clamp(26px,3.8vw,38px);margin:0;}
+.standfirst{font-size:20px;line-height:1.5;color:var(--ink);max-width:44ch;margin:0 0 26px;}
+.standfirst .em{color:var(--beef);font-weight:600;}
+.col p{color:var(--ink-2);}
+.col p strong{color:var(--ink);}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:14px;overflow:hidden;margin:8px 0 4px;}
+.tile{background:var(--surface);padding:20px 20px 18px;}
+.tile .n{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:33px;line-height:1;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+.tile .n .u{font-size:16px;color:var(--ink-2);font-weight:600;margin-left:2px;}
+.tile .l{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);margin-top:9px;line-height:1.35;}
+.tile.hot .n{color:var(--beef);}
+figure{margin:30px 0 6px;}
+.panel{background:var(--surface);border:1px solid var(--hairline);border-radius:16px;padding:26px 26px 20px;box-shadow:var(--shadow);}
+figcaption{font-size:14.5px;color:var(--ink-2);line-height:1.5;margin-top:14px;}
+figcaption b{color:var(--ink);font-weight:600;}
+.fig-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em;color:var(--ink);margin-bottom:2px;}
+.fig-sub{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;}
+svg{display:block;max-width:100%;height:auto;overflow:visible;}
+text{font-family:"IBM Plex Mono",monospace;}
+.axis{fill:var(--ink-3);font-size:12px;}
+.axlabel{fill:var(--ink);font-size:12.5px;font-weight:500;}
+.axval{fill:var(--ink);font-size:13px;font-weight:600;}
+.grid{stroke:var(--hairline);stroke-width:1;}
+.baseline{stroke:var(--hairline-2);stroke-width:1.5;}
+.b-beef{fill:var(--beef);} .b-rail{fill:var(--rail);} .b-pasture{fill:var(--pasture);} .b-plum{fill:var(--plum);} .b-ochre{fill:var(--ochre);} .b-mute{fill:var(--ink-3);}
+.s1{fill:var(--s1)} .s2{fill:var(--s2)} .s3{fill:var(--s3)} .s4{fill:var(--s4)} .s5{fill:var(--s5)} .s6{fill:var(--s6)}
+.note{border-left:3px solid var(--ochre);background:var(--ochre-soft);border-radius:0 10px 10px 0;padding:16px 20px;margin:26px 0;font-size:16px;line-height:1.5;color:var(--ink);}
+.note .h{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);font-weight:600;display:block;margin-bottom:6px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px;align-items:start;margin-top:30px;}
+.grid2 h3{font-size:19px;margin:0 0 6px;}
+.grid2 p{font-size:16px;color:var(--ink-2);}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px;}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--inset);border:1px solid var(--hairline);border-radius:7px;padding:5px 10px;color:var(--ink-2);}
+.chip b{color:var(--ink);font-weight:600;}
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;}
+.phase{background:var(--surface);border:1px solid var(--hairline);border-radius:14px;padding:20px;}
+.phase .pt{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;color:var(--ink-3);}
+.phase .py{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:27px;color:var(--beef);margin:6px 0 2px;letter-spacing:-.02em;}
+.phase .pn{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:12px;}
+.phase ul{margin:0;padding-left:17px;font-size:14.5px;color:var(--ink-2);line-height:1.5;}
+.phase li{margin-bottom:6px;} .phase li::marker{color:var(--ochre);}
+.srcs{columns:2;column-gap:40px;font-size:13.5px;line-height:1.5;color:var(--ink-2);}
+.srcs li{break-inside:avoid;margin-bottom:11px;} .srcs a{color:var(--rail);}
+.disclaimer{font-size:13px;color:var(--ink-3);line-height:1.5;max-width:66ch;margin-top:24px;font-style:italic;}
+.foot{padding-block:32px 58px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;}
+.foot a{color:var(--rail);}
+@media (max-width:780px){body{font-size:17px;}.grid2{grid-template-columns:1fr;}.phases{grid-template-columns:1fr;}.srcs{columns:1;}section{padding-block:44px;}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+</style>
+
+<div class="mast">
+  <svg class="mast-fig" viewBox="0 0 1140 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect width="1140" height="340" fill="var(--beef)" opacity="0.05"></rect>
+    <path d="M-20 300 Q 300 240 620 190 T 1200 120" fill="none" stroke="var(--beef)" stroke-width="1.4" stroke-opacity=".26" stroke-dasharray="2 7"></path>
+    <path d="M-20 250 Q 340 150 640 170 T 1200 90" fill="none" stroke="var(--ochre)" stroke-width="1.4" stroke-opacity=".22" stroke-dasharray="2 7"></path>
+  </svg>
+  <div class="wrap mast-inner">
+    <div class="kicker">
+      <span class="brandtag">◆ Mutambo Research</span>
+      <span class="tag">Beef Series · 02</span>
+      <span class="tag">Phase 1 · Costed Plan</span>
+    </div>
+    <h1>The first beef <span class="em">billion</span></h1>
+    <p class="dek">Before $10B there is $1B — the government's own target. This is the costed first stage: six hubs on the existing spine, ~$3 billion of capital, and a five-year run to a billion dollars of exports.</p>
+    <div class="byline">
+      <span><b>Target</b>&nbsp;&nbsp;$1B/yr exports by 2031</span>
+      <span><b>Capital</b>&nbsp;&nbsp;≈ $3.0B</span>
+      <span><b>Where</b>&nbsp;&nbsp;Southern Province heartland</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- 01 -->
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><h2>The shape of a billion</h2></div>
+  <div class="col">
+    <p class="standfirst">A billion dollars of beef is roughly <span class="em">167,000 tonnes</span> of product a year — about <span class="em">930,000 head</span> slaughtered for export. From today's near-zero base, that is the entire job of Phase 1.</p>
+    <p>It does not require the national herd transformation that $10B does. It requires concentrating on the herd Zambia <em>already has</em> in Southern Province, lifting off-take from ~8% toward ~15%, finishing cattle to heavier weights, and standing up the first export-grade abattoirs, cold chain and disease compartment. Everything is within reach of the existing rail spine.</p>
+  </div>
+  <figure>
+    <div class="tiles">
+      <div class="tile hot"><div class="n">$1<span class="u">B</span></div><div class="l">Export target · 2031</div></div>
+      <div class="tile"><div class="n">167<span class="u"> kt</span></div><div class="l">Beef product / year</div></div>
+      <div class="tile"><div class="n">930<span class="u">k</span></div><div class="l">Head slaughtered for export / yr</div></div>
+      <div class="tile"><div class="n">8→15<span class="u">%</span></div><div class="l">Off-take rate lift</div></div>
+      <div class="tile"><div class="n">2–3</div><div class="l">EU/halal export abattoirs</div></div>
+      <div class="tile"><div class="n">~$3<span class="u">B</span></div><div class="l">Phase-1 capital</div></div>
+    </div>
+    <figcaption><b>Phase 1 is a concentration play, not a transformation.</b> The heavy lifting — herd growth to ~40M — belongs to Phases 2 and 3; Phase 1 proves the model on the herd and rails already in place.<sup>1,2</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><h2>Six hubs on the spine</h2></div>
+  <div class="col">
+    <p class="standfirst">Every Phase-1 node already sits on, or one feeder from, the Zambia Railways spine through the cattle belt.</p>
+    <p>Kalomo — where the first DRC consignment was slaughtered — is upgraded to export grade first. Choma–Monze, in the heart of the herd, becomes the new flagship. Namwala feeds finishing cattle in; Lusaka adds air-freight for premium cuts; Kapiri Mposhi is the reefer pivot onto TAZARA; Ndola serves the Copperbelt and the Lobito interchange.</p>
+  </div>
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Phase-1 export kill capacity to build</div>
+      <div class="fig-sub">Indicative capacity by hub · thousand head / year · total ≈ 930k</div>
+      <svg viewBox="0 0 720 250" role="img" aria-label="Phase 1 hub capacity: Choma-Monze 300k, Namwala 220k, Kalomo 160k, Kapiri Mposhi 120k, Lusaka-Kafue 90k, Ndola-Kitwe 40k head per year">
+        <line class="baseline" x1="170" y1="12" x2="170" y2="236"></line>
+        <line class="grid" x1="343.3" y1="12" x2="343.3" y2="236"></line>
+        <line class="grid" x1="516.6" y1="12" x2="516.6" y2="236"></line>
+        <line class="grid" x1="690" y1="12" x2="690" y2="236"></line>
+        <text class="axis" x="343.3" y="252" text-anchor="middle">100k</text>
+        <text class="axis" x="516.6" y="252" text-anchor="middle">200k</text>
+        <text class="axis" x="690" y="252" text-anchor="middle">300k</text>
+        <!-- px/k = 520/300 = 1.7333 ; bars from x170 -->
+        <text class="axlabel" x="162" y="37" text-anchor="end">Choma · Monze</text>
+        <rect class="b-beef" x="170" y="20" width="520" height="28" rx="4"></rect>
+        <text class="axval" x="682" y="39" text-anchor="end" fill="var(--surface)">300k</text>
+        <text class="axlabel" x="162" y="75" text-anchor="end">Namwala · I-T</text>
+        <rect class="b-beef" x="170" y="58" width="381.3" height="28" rx="4"></rect>
+        <text class="axval" x="559" y="77">220k</text>
+        <text class="axlabel" x="162" y="113" text-anchor="end">Kalomo</text>
+        <rect class="b-beef" x="170" y="96" width="277.3" height="28" rx="4"></rect>
+        <text class="axval" x="455" y="115">160k</text>
+        <text class="axlabel" x="162" y="151" text-anchor="end">Kapiri Mposhi</text>
+        <rect class="b-beef" x="170" y="134" width="208" height="28" rx="4"></rect>
+        <text class="axval" x="386" y="153">120k</text>
+        <text class="axlabel" x="162" y="189" text-anchor="end">Lusaka · Kafue</text>
+        <rect class="b-beef" x="170" y="172" width="156" height="28" rx="4"></rect>
+        <text class="axval" x="334" y="191">90k</text>
+        <text class="axlabel" x="162" y="227" text-anchor="end">Ndola · Kitwe</text>
+        <rect class="b-beef" x="170" y="210" width="69.3" height="28" rx="4"></rect>
+        <text class="axval" x="247" y="229">40k</text>
+      </svg>
+    </div>
+    <figcaption><b>Capacity follows the herd.</b> The two Southern hubs carry more than half of Phase-1 throughput. Full detail — the facilities each hub needs — is in the interactive <em>Rail &amp; Facilities Map</em>.<sup>3</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><h2>The $3 billion, itemised</h2></div>
+  <div class="col">
+    <p class="standfirst">The biggest Phase-1 line isn't steel — it's <span class="em">animals</span>: the finance, genetics and finishing that turn a low-off-take herd into export supply.</p>
+  </div>
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Phase-1 capital stack</div>
+      <div class="fig-sub">Cumulative to 2031 · US$ billion · order-of-magnitude · total ≈ $3.0B</div>
+      <svg viewBox="0 0 720 192" role="img" aria-label="Phase 1 capital: herd finance and finishing 1.0B, abattoirs and cold hubs 0.8B, reefer and rail and Dar cold 0.4B, disease compartment and LITS 0.35B, firm power 0.25B, working capital 0.2B, total about 3.0B">
+        <rect class="s6" x="40" y="40" width="213.3" height="46" rx="3"></rect>
+        <rect class="s5" x="255.3" y="40" width="170.7" height="46" rx="3"></rect>
+        <rect class="s4" x="428" y="40" width="85.3" height="46" rx="3"></rect>
+        <rect class="s3" x="515.3" y="40" width="74.7" height="46" rx="3"></rect>
+        <rect class="s2" x="592" y="40" width="53.3" height="46" rx="3"></rect>
+        <rect class="s1" x="647.3" y="40" width="42.7" height="46" rx="3"></rect>
+        <g font-size="12">
+          <line x1="146.7" y1="90" x2="146.7" y2="100" class="grid"></line>
+          <text class="axval" x="146.7" y="34" text-anchor="middle">$1.0B</text>
+          <text class="axlabel" x="146.7" y="116" text-anchor="middle">Herd finance + finishing</text>
+          <line x1="340.7" y1="90" x2="340.7" y2="100" class="grid"></line>
+          <text class="axval" x="340.7" y="34" text-anchor="middle">$0.8B</text>
+          <text class="axlabel" x="340.7" y="116" text-anchor="middle">Abattoirs + cold hubs</text>
+          <line x1="470.7" y1="90" x2="470.7" y2="100" class="grid"></line>
+          <text class="axval" x="470.7" y="34" text-anchor="middle">$0.4B</text>
+          <text class="axlabel" x="470.7" y="134" text-anchor="middle">Reefer + rail + Dar cold</text>
+          <line x1="552.7" y1="90" x2="552.7" y2="100" class="grid"></line>
+          <text class="axlabel" x="552.7" y="152" text-anchor="middle">Disease compartment + LITS · $0.35B</text>
+          <line x1="668" y1="90" x2="668" y2="100" class="grid"></line>
+          <text class="axlabel" x="690" y="170" text-anchor="end">Firm power $0.25B · Working capital $0.2B</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Split is illustrative.</b> Funded through blended finance: off-take-backed working capital and contract-farming finance for the herd line; DFI + PPP concessions for abattoirs, cold and power; sovereign guarantee to crowd in private capital.</figcaption>
+  </figure>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><h2>The five-year ramp</h2></div>
+  <div class="col">
+    <p class="standfirst">Revenue is back-loaded: the abattoirs and herd finance built in years one and two only convert to export dollars from year three.</p>
+  </div>
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Export earnings ramp to $1B</div>
+      <div class="fig-sub">US$ billion / year · Phase 1</div>
+      <svg viewBox="0 0 720 250" role="img" aria-label="Export earnings rising from 0.05B in 2026 to 1.0B in 2031">
+        <line class="grid" x1="60" y1="200" x2="680" y2="200"></line><text class="axis" x="52" y="204" text-anchor="end">0</text>
+        <line class="grid" x1="60" y1="112" x2="680" y2="112"></line><text class="axis" x="52" y="116" text-anchor="end">$0.5B</text>
+        <line class="grid" x1="60" y1="24" x2="680" y2="24"></line><text class="axis" x="52" y="28" text-anchor="end">$1.0B</text>
+        <path d="M60,191.2 L184,173.6 L308,138.4 L432,94.4 L556,50.4 L680,24 L680,200 L60,200 Z" fill="var(--beef)" opacity=".13"></path>
+        <path d="M60,191.2 L184,173.6 L308,138.4 L432,94.4 L556,50.4 L680,24" fill="none" stroke="var(--beef)" stroke-width="3"></path>
+        <g>
+          <circle cx="60" cy="191.2" r="4.5" fill="var(--beef)"></circle>
+          <circle cx="184" cy="173.6" r="4.5" fill="var(--beef)"></circle>
+          <circle cx="308" cy="138.4" r="4.5" fill="var(--beef)"></circle>
+          <circle cx="432" cy="94.4" r="4.5" fill="var(--beef)"></circle>
+          <circle cx="556" cy="50.4" r="4.5" fill="var(--beef)"></circle>
+          <circle cx="680" cy="24" r="6" fill="var(--beef)" stroke="var(--surface)" stroke-width="2"></circle>
+          <text class="axval" x="672" y="20" text-anchor="end">$1.0B</text>
+        </g>
+        <g class="axis" font-size="12">
+          <text x="60" y="222" text-anchor="start">2026</text>
+          <text x="184" y="222" text-anchor="middle">2027</text>
+          <text x="308" y="222" text-anchor="middle">2028</text>
+          <text x="432" y="222" text-anchor="middle">2029</text>
+          <text x="556" y="222" text-anchor="middle">2030</text>
+          <text x="680" y="222" text-anchor="end">2031</text>
+        </g>
+      </svg>
+    </div>
+  </figure>
+  <div class="phases">
+    <div class="phase">
+      <div class="pt">2026 – 2027</div><div class="py">Stand up</div><div class="pn">Foundations</div>
+      <ul>
+        <li>Upgrade Kalomo to export grade; first Gulf/halal trials via Dar</li>
+        <li>LITS pilot + disease compartment in the Southern core</li>
+        <li>Launch herd finance &amp; feedlot seed capacity</li>
+        <li>Grow DRC / regional volume by road</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="pt">2028 – 2029</div><div class="py">Build</div><div class="pn">Flagship online</div>
+      <ul>
+        <li>Choma–Monze abattoir + cold hub commissioned</li>
+        <li>Reefer service on the spine + TAZARA to Dar</li>
+        <li>EU compartment audit; China protocol talks</li>
+        <li>Off-take lifts as finishing scales</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="pt">2030 – 2031</div><div class="py">Scale to $1B</div><div class="pn">Run-rate</div>
+      <ul>
+        <li>Lusaka air-freight for premium chilled cuts</li>
+        <li>All six hubs at Phase-1 capacity (~930k head)</li>
+        <li>Diversified market mix: regional + Gulf + EU pilot</li>
+        <li>$1B export run-rate achieved</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section>
+  <div class="sec-head"><span class="sec-num">05</span><h2>How it's financed</h2></div>
+  <div class="col">
+    <p class="standfirst">No single lender funds a $3B agro-industrial build. Phase 1 stacks capital by risk appetite.</p>
+  </div>
+  <div class="grid2">
+    <div>
+      <h3 style="color:var(--beef)">The herd line ($1.0B)</h3>
+      <p>Off-take-backed working capital, warehouse/livestock receipts, and contract-farming (out-grower) finance — repaid from the cattle themselves. This is where smallholders enter the value chain as suppliers, not spectators.</p>
+    </div>
+    <div>
+      <h3 style="color:var(--rail)">The hard assets ($1.8B)</h3>
+      <p>DFI debt (IFC, AfDB, DFC via Lobito, DBSA) and PPP concessions for abattoirs, cold hubs, reefer and power, crowded in by a sovereign guarantee and anchored by off-take agreements with regional and Gulf buyers.</p>
+    </div>
+  </div>
+  <div class="note">
+    <span class="h">The gate comes first</span>
+    The $0.35B disease-compartment &amp; LITS line is small but sequenced <strong>first</strong>: without it, Phase 1 is capped at low-value regional trade and never reaches the Gulf or EU rungs that make $1B possible. See <em>The Disease-Free Gate</em>.
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section>
+  <div class="sec-head"><span class="sec-num">✦</span><h2>Sources &amp; notes</h2></div>
+  <ol class="srcs">
+    <li>Ministry of Fisheries &amp; Livestock — <a href="https://www.mfl.gov.zm/?p=2159">$1B beef export target</a>; APA News — <a href="https://apanews.net/zambia-to-export-first-ever-beef-consignment-to-drc/">first DRC consignment</a> (Namwala / Kalomo, Oct 2025).</li>
+    <li>WorldsTopExports / S&amp;P Global — <a href="https://www.worldstopexports.com/average-frozen-beef-prices-compared-by-top-exporters/">beef export prices</a> (~$4,700–6,400/t) used to convert $1B to tonnes and head.</li>
+    <li>ResearchGate / ZamStats &amp; Logistics Cluster — <a href="https://www.researchgate.net/figure/Top-10-districts-in-Zambia-with-the-highest-population-of-cattle_fig3_380492425">top cattle districts</a>; <a href="https://lca.logcluster.org/24-zambia-railway-assessment">Zambia Railway assessment</a> (hub geography).</li>
+  </ol>
+  <p class="disclaimer">Independent research and scenario analysis, not a government plan or investment advice. Hub capacities, the capital stack, the earnings ramp and financing mix are illustrative order-of-magnitude values built on the cited public data and standard livestock/logistics assumptions. Part of the Mutambo Research beef series. Prepared September 2026.</p>
+</section>
+
+</main>
+<div class="foot wrap">MUTAMBO RESEARCH · ZAMBIA BEEF SERIES · 02 · THE FIRST BEEF BILLION</div>

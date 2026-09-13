@@ -1,0 +1,288 @@
+<title>Feeding the Herd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F6F1E7; --surface:#FDFBF5; --surface-2:#EFE7D6; --inset:#F1EADB;
+  --ink:#241E17; --ink-2:#6E6353; --ink-3:#948976; --hairline:#E1D8C5; --hairline-2:#D3C7AE;
+  --beef:#A8321E; --rail:#1D6FA5; --pasture:#4E7A3A; --plum:#8A3E86; --ochre:#B8841E;
+  --beef-soft:#EBD6CF; --rail-soft:#D5E4EE; --pasture-soft:#DCE6D2; --plum-soft:#E9DBE8; --ochre-soft:#F0E4C8;
+  --s1:#E7C77A; --s2:#D8A24A; --s3:#C67C2C; --s4:#B15A22; --s5:#9C3E1C; --s6:#822C17;
+  --shadow:0 1px 2px rgba(40,30,15,.06),0 8px 26px rgba(40,30,15,.07);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --pasture-soft:#1E2C16; --plum-soft:#2E1E2C; --ochre-soft:#33290F;
+  --s1:#6E5C2E; --s2:#8A6A2A; --s3:#A9722B; --s4:#C06238; --s5:#D06A4A; --s6:#DB6048;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --pasture-soft:#1E2C16; --plum-soft:#2E1E2C; --ochre-soft:#33290F;
+  --s1:#6E5C2E; --s2:#8A6A2A; --s3:#A9722B; --s4:#C06238; --s5:#D06A4A; --s6:#DB6048;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto;font-size:18px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:22px;}
+.col{max-width:720px;}
+h1,h2,h3,.display{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:800;line-height:1.03;letter-spacing:-.015em;text-wrap:balance;margin:0;}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);}
+a{color:var(--rail);text-underline-offset:2px;}
+p{margin:0 0 1.1em;}
+strong{font-weight:600;color:var(--ink);}
+sup{font-size:.62em;font-weight:600;color:var(--ochre);font-family:"IBM Plex Mono",monospace;padding-left:1px;line-height:0;}
+.mast{position:relative;overflow:hidden;border-bottom:1px solid var(--hairline);}
+.mast-inner{padding-block:60px 38px;position:relative;z-index:2;}
+.kicker{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px;}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--hairline-2);border-radius:100px;padding:5px 11px;}
+.brandtag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);font-weight:600;}
+.mast h1{font-size:clamp(34px,6vw,68px);margin:0;color:var(--ink);}
+.mast h1 .em{color:var(--beef);}
+.dek{font-size:clamp(18px,2.3vw,23px);line-height:1.42;color:var(--ink-2);max-width:36ch;margin:20px 0 0;font-weight:400;}
+.byline{margin-top:26px;display:flex;gap:24px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);letter-spacing:.02em;}
+.byline b{color:var(--ink);font-weight:600;}
+.mast-fig{position:absolute;inset:0;z-index:1;opacity:.9;}
+section{padding-block:56px;border-bottom:1px solid var(--hairline);}
+.sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:10px;}
+.sec-num{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;color:var(--beef);letter-spacing:.05em;flex:none;padding-top:6px;}
+.sec-head h2{font-size:clamp(26px,3.8vw,38px);margin:0;}
+.standfirst{font-size:20px;line-height:1.5;color:var(--ink);max-width:44ch;margin:0 0 26px;}
+.standfirst .em{color:var(--beef);font-weight:600;}
+.col p{color:var(--ink-2);}
+.col p strong{color:var(--ink);}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:14px;overflow:hidden;margin:8px 0 4px;}
+.tile{background:var(--surface);padding:20px 20px 18px;}
+.tile .n{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:33px;line-height:1;color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+.tile .n .u{font-size:16px;color:var(--ink-2);font-weight:600;margin-left:2px;}
+.tile .l{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);margin-top:9px;line-height:1.35;}
+.tile.hot .n{color:var(--beef);}
+figure{margin:30px 0 6px;}
+.panel{background:var(--surface);border:1px solid var(--hairline);border-radius:16px;padding:26px 26px 20px;box-shadow:var(--shadow);}
+figcaption{font-size:14.5px;color:var(--ink-2);line-height:1.5;margin-top:14px;}
+figcaption b{color:var(--ink);font-weight:600;}
+.fig-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em;color:var(--ink);margin-bottom:2px;}
+.fig-sub{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;}
+svg{display:block;max-width:100%;height:auto;overflow:visible;}
+text{font-family:"IBM Plex Mono",monospace;}
+.axis{fill:var(--ink-3);font-size:12px;}
+.axlabel{fill:var(--ink);font-size:12.5px;font-weight:500;}
+.axval{fill:var(--ink);font-size:13px;font-weight:600;}
+.grid{stroke:var(--hairline);stroke-width:1;}
+.baseline{stroke:var(--hairline-2);stroke-width:1.5;}
+.b-beef{fill:var(--beef);} .b-rail{fill:var(--rail);} .b-pasture{fill:var(--pasture);} .b-plum{fill:var(--plum);} .b-ochre{fill:var(--ochre);} .b-mute{fill:var(--ink-3);}
+.s1{fill:var(--s1)} .s2{fill:var(--s2)} .s3{fill:var(--s3)} .s4{fill:var(--s4)} .s5{fill:var(--s5)} .s6{fill:var(--s6)}
+.note{border-left:3px solid var(--ochre);background:var(--ochre-soft);border-radius:0 10px 10px 0;padding:16px 20px;margin:26px 0;font-size:16px;line-height:1.5;color:var(--ink);}
+.note .h{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);font-weight:600;display:block;margin-bottom:6px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px 40px;align-items:start;margin-top:30px;}
+.grid2 h3{font-size:19px;margin:0 0 6px;}
+.grid2 p{font-size:16px;color:var(--ink-2);}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px;}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:12px;background:var(--inset);border:1px solid var(--hairline);border-radius:7px;padding:5px 10px;color:var(--ink-2);}
+.chip b{color:var(--ink);font-weight:600;}
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;}
+.phase{background:var(--surface);border:1px solid var(--hairline);border-radius:14px;padding:20px;}
+.phase .pt{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;color:var(--ink-3);}
+.phase .py{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:27px;color:var(--beef);margin:6px 0 2px;letter-spacing:-.02em;}
+.phase .pn{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:12px;}
+.phase ul{margin:0;padding-left:17px;font-size:14.5px;color:var(--ink-2);line-height:1.5;}
+.phase li{margin-bottom:6px;} .phase li::marker{color:var(--ochre);}
+.srcs{columns:2;column-gap:40px;font-size:13.5px;line-height:1.5;color:var(--ink-2);}
+.srcs li{break-inside:avoid;margin-bottom:11px;} .srcs a{color:var(--rail);}
+.disclaimer{font-size:13px;color:var(--ink-3);line-height:1.5;max-width:66ch;margin-top:24px;font-style:italic;}
+.foot{padding-block:32px 58px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;}
+.foot a{color:var(--rail);}
+@media (max-width:780px){body{font-size:17px;}.grid2{grid-template-columns:1fr;}.phases{grid-template-columns:1fr;}.srcs{columns:1;}section{padding-block:44px;}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+
+.leg{display:flex;gap:18px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-2);margin-top:12px;}
+.leg span{display:inline-flex;align-items:center;gap:7px;} .leg i{width:15px;height:3px;border-radius:2px;display:inline-block;}
+</style>
+
+<div class="mast">
+  <svg class="mast-fig" viewBox="0 0 1140 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect width="1140" height="340" fill="var(--pasture)" opacity="0.06"></rect>
+    <path d="M-20 270 Q 300 200 620 220 T 1200 150" fill="none" stroke="var(--pasture)" stroke-width="1.4" stroke-opacity=".3" stroke-dasharray="2 7"></path>
+    <path d="M-20 300 Q 340 260 640 250 T 1200 200" fill="none" stroke="var(--rail)" stroke-width="1.4" stroke-opacity=".22" stroke-dasharray="2 7"></path>
+  </svg>
+  <div class="wrap mast-inner">
+    <div class="kicker">
+      <span class="brandtag">◆ Mutambo Research</span>
+      <span class="tag">Beef Series · 04</span>
+      <span class="tag">Feed · Water · Rangeland</span>
+    </div>
+    <h1>Feeding the <span class="em">herd</span></h1>
+    <p class="dek">You cannot grow a herd from 5 to 40 million on rain and luck. Feed and water are the silent constraint on the whole plan — and the same drought that empties Kariba empties the cattle troughs.</p>
+    <div class="byline">
+      <span><b>The edge</b>&nbsp;&nbsp;A maize &amp; soya surplus most beef nations lack</span>
+      <span><b>The risk</b>&nbsp;&nbsp;A five-month dry-season feed gap</span>
+      <span><b>Cost</b>&nbsp;&nbsp;≈ $9B — the biggest line in the build</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- 01 -->
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><h2>The dry-season gap</h2></div>
+  <div class="col">
+    <p class="standfirst">Zambia's cattle eat well for half the year and starve slowly for the other half. Communal grazing tracks the rains — lush from November, gone by August.</p>
+    <p>That seasonal collapse in forage is why calves die, cows skip a calving, and carcasses stay light. Closing it — with planted pasture, fodder banks, silage, crop residues and finishing rations — is what converts a subsistence herd into an export herd. It is the single biggest lever on off-take and carcass weight.</p>
+  </div>
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Forage collapses when the herd still has to eat</div>
+      <div class="fig-sub">Indexed forage availability vs. herd energy requirement · by month</div>
+      <svg viewBox="0 0 720 262" role="img" aria-label="Natural forage availability peaks in the rainy season and falls far below the herd's steady energy requirement from June to October">
+        <line class="grid" x1="60" y1="30" x2="680" y2="30"></line><text class="axis" x="52" y="34" text-anchor="end">100</text>
+        <line class="grid" x1="60" y1="120" x2="680" y2="120"></line><text class="axis" x="52" y="124" text-anchor="end">50</text>
+        <line class="baseline" x1="60" y1="210" x2="680" y2="210"></line><text class="axis" x="52" y="214" text-anchor="end">0</text>
+        <!-- deficit shading Jun-Oct (indices 5-9) between requirement(102) and forage -->
+        <path d="M341.8,102 L567.3,102 L567.3,156 L510.9,163.2 L454.5,150.6 L398.2,134.4 L341.8,116.4 Z" fill="var(--beef)" opacity="0.14"></path>
+        <text x="454" y="188" text-anchor="middle" fill="var(--beef)" font-size="10.5" font-weight="600" letter-spacing="0.05em">DRY-SEASON FEED GAP</text>
+        <!-- requirement line (flat 60 -> y102) -->
+        <line x1="60" y1="102" x2="680" y2="102" stroke="var(--beef)" stroke-width="2" stroke-dasharray="5 4"></line>
+        <!-- forage line -->
+        <polyline points="60,66 116.4,44.4 172.7,39 229.1,51.6 285.5,84 341.8,116.4 398.2,134.4 454.5,150.6 510.9,163.2 567.3,156 623.6,111 680,80.4" fill="none" stroke="var(--pasture)" stroke-width="3"></polyline>
+        <g class="axis" font-size="11">
+          <text x="60" y="228" text-anchor="middle">J</text><text x="116" y="228" text-anchor="middle">F</text><text x="173" y="228" text-anchor="middle">M</text>
+          <text x="229" y="228" text-anchor="middle">A</text><text x="286" y="228" text-anchor="middle">M</text><text x="342" y="228" text-anchor="middle">J</text>
+          <text x="398" y="228" text-anchor="middle">J</text><text x="455" y="228" text-anchor="middle">A</text><text x="511" y="228" text-anchor="middle">S</text>
+          <text x="567" y="228" text-anchor="middle">O</text><text x="624" y="228" text-anchor="middle">N</text><text x="680" y="228" text-anchor="middle">D</text>
+        </g>
+      </svg>
+      <div class="leg">
+        <span><i style="background:var(--pasture)"></i> Natural forage available</span>
+        <span><i style="background:var(--beef)"></i> Herd energy requirement</span>
+      </div>
+    </div>
+    <figcaption><b>Five months in deficit.</b> From June to October the range can't feed the herd it carries. Planted pasture, conserved fodder and finishing rations fill that trough — the difference between a herd that survives and one that finishes for export.<sup>4</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><h2>Zambia's quiet advantage: grain</h2></div>
+  <div class="col">
+    <p class="standfirst">Here is what Botswana and Namibia don't have and can't easily build: <span class="em">a domestic grain surplus</span> to finish cattle on.</p>
+    <p>Zambia grew <strong>3.7 million tonnes of maize</strong> in 2024/25 and a record <strong>5.1 million tonnes</strong> the following season — roughly 4.2 Mt available after seed and other uses — with a national target of <strong>10 Mt by 2031</strong>. Soya, the protein in every feed ration, was 0.48 Mt and is targeted at <strong>3 Mt</strong>.<sup>5,6</sup> A finishing industry runs on exactly this: maize energy, soya-cake protein. The feed base is a policy choice Zambia is already making.</p>
+  </div>
+  <figure>
+    <div class="tiles">
+      <div class="tile"><div class="n">3.7<span class="u"> Mt</span></div><div class="l">Maize, 2024/25 (record 5.1 Mt next season)</div></div>
+      <div class="tile"><div class="n">10<span class="u"> Mt</span></div><div class="l">National maize target · 2031</div></div>
+      <div class="tile"><div class="n">0.48<span class="u"> Mt</span></div><div class="l">Soya bean today</div></div>
+      <div class="tile hot"><div class="n">3<span class="u"> Mt</span></div><div class="l">Soya target · 2031 (the ration protein)</div></div>
+    </div>
+    <figcaption><b>The finishing feed exists — if the herd is allowed to compete for it.</b> A $10B beef sector would draw an estimated ~4–5 Mt of feed-grain a year; that is why the herd plan and the crop plan have to be built together, not in separate ministries.<sup>5</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><h2>Water is the harder constraint</h2></div>
+  <div class="col">
+    <p class="standfirst">A beef animal drinks <span class="em">55–112 litres a day</span>. Multiply by a herd heading for 40 million and water, not grass, becomes the limit.</p>
+    <p>At a working average of ~60 litres per head per day, today's herd already needs about 300 million litres <em>daily</em>; a $10B herd would need roughly <strong>2.4 billion litres a day</strong>. In a country where the 2024 drought cut hydropower to a trickle, that water can't be assumed — it has to be built: boreholes, dams, and solar-powered pumping that runs whether or not the grid does. The cold chain and the cattle troughs need the same thing — <strong>firm, off-grid solar</strong>.</p>
+  </div>
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Daily herd water demand scales with the herd</div>
+      <div class="fig-sub">Megalitres per day · at ~60 L / head / day</div>
+      <svg viewBox="0 0 720 200" role="img" aria-label="Herd water demand: today 5.1 million head 306 megalitres a day, mid-build 18 million head 1080, at 10 billion dollars 40 million head 2400 megalitres a day">
+        <line class="baseline" x1="180" y1="14" x2="180" y2="176"></line>
+        <line class="grid" x1="384" y1="14" x2="384" y2="176"></line>
+        <line class="grid" x1="588" y1="14" x2="588" y2="176"></line>
+        <text class="axis" x="384" y="192" text-anchor="middle">1,000 ML/day</text>
+        <text class="axis" x="588" y="192" text-anchor="middle">2,000 ML/day</text>
+        <!-- px/ML = 510/2500 = 0.204 ; from x180 -->
+        <text class="axlabel" x="172" y="37" text-anchor="end">Today · 5.1M</text>
+        <rect class="b-rail" x="180" y="24" width="62.4" height="28" rx="4"></rect>
+        <text class="axval" x="250" y="43">306</text>
+        <text class="axlabel" x="172" y="83" text-anchor="end">Mid-build · ~18M</text>
+        <rect class="b-rail" x="180" y="70" width="220.3" height="28" rx="4"></rect>
+        <text class="axval" x="408" y="89">1,080</text>
+        <text class="axlabel" x="172" y="129" text-anchor="end">At $10B · ~40M</text>
+        <rect class="b-rail" x="180" y="116" width="489.6" height="28" rx="4"></rect>
+        <text class="axval" x="662" y="135" text-anchor="end" fill="var(--surface)">2,400 ML/day</text>
+        <text class="axis" x="180" y="168">0</text>
+      </svg>
+    </div>
+    <figcaption><b>~2.4 billion litres a day at full scale.</b> Delivered through thousands of boreholes and dams with solar pumping — the same off-grid, drought-proof power model the cold chain needs. Water and energy are one problem, solved once.<sup>4</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><h2>Rangeland: graze it without wrecking it</h2></div>
+  <div class="col">
+    <p class="standfirst">Natural range in much of Zambia carries one animal per many hectares. Planted pasture carries several times more — the shift from extensive to managed grazing is how the land supports a bigger herd.</p>
+  </div>
+  <div class="grid2">
+    <div>
+      <h3 style="color:var(--pasture)">Manage the commons</h3>
+      <p>Rotational grazing that leaves 40–50% of forage to regrow, water points that spread grazing pressure, and fodder trees on the Kafue Flats and Barotse floodplains where cattle already move with the seasons. Overgrazing is the fast way to lose the whole asset.</p>
+    </div>
+    <div>
+      <h3 style="color:var(--ochre)">Plant the difference</h3>
+      <p>Improved pasture, legumes and dedicated fodder banks multiply carrying capacity on a fraction of the land — and bridge the dry-season gap. This is the productivity lever that lets the herd grow without simply clearing more bush.</p>
+    </div>
+  </div>
+  <div class="note">
+    <span class="h">Why this is the $9B line</span>
+    In the main report, "herd · pasture · water" is the single biggest capital block — about <strong>$9 billion</strong>. It is slow, biological capital: pasture and water built over cattle generations. Below is how that line breaks down.
+  </div>
+  <figure>
+    <div class="panel">
+      <div class="fig-title">The herd, pasture &amp; water capital line</div>
+      <div class="fig-sub">Cumulative over the program · US$ billion · order-of-magnitude · total ≈ $9B</div>
+      <svg viewBox="0 0 720 190" role="img" aria-label="Cost stack: planted pasture and fodder 3.0B, water infrastructure 2.5B, feed mills and rations 1.5B, genetics and restocking 1.5B, extension and health 0.5B, total about 9B">
+        <rect class="s6" x="40" y="40" width="213.3" height="46" rx="3"></rect>
+        <rect class="s5" x="255.3" y="40" width="177.8" height="46" rx="3"></rect>
+        <rect class="s4" x="435.1" y="40" width="106.7" height="46" rx="3"></rect>
+        <rect class="s3" x="543.8" y="40" width="106.7" height="46" rx="3"></rect>
+        <rect class="s2" x="652.5" y="40" width="35.6" height="46" rx="3"></rect>
+        <g font-size="12">
+          <line x1="146.7" y1="90" x2="146.7" y2="100" class="grid"></line>
+          <text class="axval" x="146.7" y="34" text-anchor="middle">$3.0B</text>
+          <text class="axlabel" x="146.7" y="116" text-anchor="middle">Planted pasture + fodder</text>
+          <line x1="344.2" y1="90" x2="344.2" y2="100" class="grid"></line>
+          <text class="axval" x="344.2" y="34" text-anchor="middle">$2.5B</text>
+          <text class="axlabel" x="344.2" y="116" text-anchor="middle">Water infrastructure</text>
+          <line x1="488.5" y1="90" x2="488.5" y2="100" class="grid"></line>
+          <text class="axval" x="488.5" y="34" text-anchor="middle">$1.5B</text>
+          <text class="axlabel" x="488.5" y="134" text-anchor="middle">Feed mills + rations</text>
+          <line x1="597.2" y1="90" x2="597.2" y2="100" class="grid"></line>
+          <text class="axlabel" x="690" y="152" text-anchor="end">Genetics + restocking · $1.5B</text>
+          <line x1="670.3" y1="90" x2="670.3" y2="100" class="grid"></line>
+          <text class="axlabel" x="690" y="170" text-anchor="end">Extension + health · $0.5B</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Split is illustrative.</b> Pasture, water and feed dominate because they are the biological foundation everything else stands on. Carbon co-finance from rangeland restoration can offset part of the pasture and fodder bill.</figcaption>
+  </figure>
+</section>
+
+<!-- SOURCES -->
+<section>
+  <div class="sec-head"><span class="sec-num">✦</span><h2>Sources &amp; notes</h2></div>
+  <ol class="srcs">
+    <li>ZamStats — <a href="https://www.zamstats.gov.zm/area-planted-ha-and-maize-production-mt-trends-2017-2018-to-2024-2025-agricultural-season/">maize production trends</a> (3.66 Mt 2024/25; record 5.1 Mt).</li>
+    <li>Presidential Delivery Unit — <a href="https://www.pdu.gov.zm/blog/beyond-the-bumper-harvest-the-reforms-transforming-zambias-agriculture">agriculture reforms &amp; 2031 targets</a> (maize 10 Mt, soya 3 Mt, wheat 1 Mt).</li>
+    <li>UNIDO / ResearchGate — <a href="https://www.researchgate.net/publication/335912204_Soya_Beans_Production_in_Zambia_Opportunities_and_Challenges">Zambia soya bean production</a> (0.48 Mt; feed / soya-cake).</li>
+    <li>MLA / university extension — <a href="https://www.mla.com.au/globalassets/mla-corporate/research-and-development/program-areas/feeding-finishing-and-nutrition/feedlot-design-manual/04-water-requirements-2016_04_01.pdf">beef cattle water requirements</a> (55–112 L/head/day) and rangeland carrying-capacity method (leave 40–50% forage).</li>
+    <li>Mutambo Research — <a href="#">Zambia at $10B Beef</a> (the "herd · pasture · water" capital line and herd-growth scenarios this brief expands).</li>
+  </ol>
+  <p class="disclaimer">Independent research and scenario analysis, not a government or agronomic plan. The seasonal forage curve, water-demand figures, feed-grain estimates and cost split are illustrative order-of-magnitude values built on the cited public data and standard livestock-nutrition and rangeland practice. Part of the Mutambo Research beef series. Prepared September 2026.</p>
+</section>
+
+</main>
+<div class="foot wrap">MUTAMBO RESEARCH · ZAMBIA BEEF SERIES · 04 · FEEDING THE HERD</div>
