@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beef Rail & Facilities Map — Mutambo Research</title>
+<meta name="description" content="Interactive map of Zambia's rail corridors and the beef facilities each node needs, sized to current cattle stock and the $1B / $10B export targets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F6F1E7; --surface:#FDFBF5; --surface-2:#EFE7D6; --inset:#F1EADB;
+  --ink:#241E17; --ink-2:#6E6353; --ink-3:#948976; --hairline:#E1D8C5; --hairline-2:#D3C7AE;
+  --beef:#A8321E; --rail:#1D6FA5; --pasture:#4E7A3A; --plum:#8A3E86; --ochre:#B8841E;
+  --beef-soft:#EBD6CF; --rail-soft:#D5E4EE; --pasture-soft:#DCE6D2; --plum-soft:#E9DBE8; --ochre-soft:#F0E4C8;
+  --shadow:0 1px 2px rgba(40,30,15,.06),0 10px 30px rgba(40,30,15,.09);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --pasture-soft:#1E2C16; --plum-soft:#2E1E2C; --ochre-soft:#33290F;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.45);
+}}
+:root[data-theme="dark"]{
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --pasture-soft:#1E2C16; --plum-soft:#2E1E2C; --ochre-soft:#33290F;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 34px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Newsreader",Georgia,serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+img{max-width:100%}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+h1,h2,h3,.disp{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:800;letter-spacing:-.015em;line-height:1.05;text-wrap:balance;margin:0;}
+a{color:var(--rail);text-underline-offset:2px;}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:22px;}
+
+/* header */
+header{border-bottom:1px solid var(--hairline);}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:16px;flex-wrap:wrap;}
+.brand{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);font-weight:600;}
+.brand a{color:inherit;text-decoration:none;}
+.navlink{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.04em;color:var(--ink-2);text-decoration:none;}
+.navlink:hover{color:var(--beef);}
+.head-main{padding-block:30px 26px;}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--beef);font-weight:600;}
+h1{font-size:clamp(30px,5vw,52px);margin:14px 0 0;}
+.sub{font-size:clamp(17px,2vw,20px);color:var(--ink-2);max-width:60ch;margin:16px 0 0;}
+
+/* controls bar */
+.controls{display:flex;gap:22px;align-items:center;flex-wrap:wrap;padding:16px 0 18px;border-top:1px dashed var(--hairline);margin-top:24px;}
+.seg-wrap{display:flex;flex-direction:column;gap:7px;}
+.seg-label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);}
+.seg{display:inline-flex;background:var(--inset);border:1px solid var(--hairline);border-radius:11px;padding:3px;gap:2px;}
+.seg button{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--ink-2);
+  background:transparent;border:none;border-radius:8px;padding:8px 15px;cursor:pointer;transition:.12s;white-space:nowrap;}
+.seg button[aria-pressed=true]{background:var(--beef);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+:root[data-theme=dark] .seg button[aria-pressed=true],
+:root:not([data-theme=light]) .seg button[aria-pressed=true]{color:#fff;}
+.seg button:focus-visible{outline:2px solid var(--beef);outline-offset:2px;}
+.legend{display:flex;gap:14px 18px;flex-wrap:wrap;margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-2);}
+.legend span{display:inline-flex;align-items:center;gap:6px;}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none;}
+.dot.op{background:var(--pasture);} .dot.up{background:var(--ochre);} .dot.p1{background:var(--rail);} .dot.p2{background:var(--plum);}
+
+/* main split */
+.stage{display:grid;grid-template-columns:1.55fr 1fr;gap:22px;padding-block:8px 40px;align-items:start;}
+.map-card{background:var(--surface);border:1px solid var(--hairline);border-radius:18px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.map-note{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);letter-spacing:.03em;line-height:1.45;padding:0 18px 15px;}
+svg{display:block;width:100%;height:auto;}
+.corr{fill:none;stroke-linecap:round;}
+.corr.spine{stroke:var(--pasture);stroke-width:4.5;}
+.corr.tazara{stroke:var(--rail);stroke-width:5;}
+.corr.lobito{stroke:var(--beef);stroke-width:5;}
+.corr.plan{stroke:var(--beef);stroke-width:2.4;stroke-dasharray:3 6;opacity:.75;}
+.corr.feeder{stroke:var(--beef);stroke-width:2;stroke-dasharray:2 5;opacity:.8;}
+.corr.road{stroke:var(--ink-3);stroke-width:2;stroke-dasharray:2 6;opacity:.7;}
+.node{cursor:pointer;}
+.node circle.hit{fill:transparent;}
+.node circle.mk{stroke:var(--surface);stroke-width:2.5;transition:.12s;}
+.node:hover circle.mk{stroke:var(--ink);}
+.node[aria-selected=true] circle.mk{stroke:var(--ink);stroke-width:3.5;}
+.node[aria-selected=true] circle.ring{stroke:var(--beef);stroke-width:2.5;fill:none;opacity:1;}
+.node circle.ring{opacity:0;}
+.node text.lab{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;fill:var(--ink);}
+.node text.cap{font-family:"IBM Plex Mono",monospace;font-size:10.5px;fill:var(--ink-2);}
+.node:focus-visible{outline:none;}
+.node:focus-visible circle.mk{stroke:var(--beef);stroke-width:3.5;}
+.port rect{stroke:var(--surface);stroke-width:2.5;}
+text.belt{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--beef);opacity:.8;letter-spacing:.05em;}
+text.pmark{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.03em;}
+
+/* tooltip */
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-family:"IBM Plex Mono",monospace;
+  font-size:11.5px;line-height:1.4;padding:7px 10px;border-radius:8px;opacity:0;transform:translate(-50%,-115%);transition:opacity .1s;z-index:5;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.3);}
+.tip b{color:#fff;font-weight:600;}
+:root:not([data-theme=light]) .tip,:root[data-theme=dark] .tip{color:#16120C;}
+:root:not([data-theme=light]) .tip b,:root[data-theme=dark] .tip b{color:#16120C;}
+
+/* detail panel */
+.panel{background:var(--surface);border:1px solid var(--hairline);border-radius:18px;box-shadow:var(--shadow);
+  position:sticky;top:14px;overflow:hidden;}
+.p-head{padding:20px 22px 16px;border-bottom:1px solid var(--hairline);background:var(--surface-2);}
+.p-corr{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+.p-name{font-size:26px;margin:5px 0 0;}
+.p-role{font-size:15.5px;color:var(--ink-2);margin:8px 0 0;line-height:1.4;}
+.p-body{padding:18px 22px 22px;}
+.p-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:12px;overflow:hidden;margin-bottom:18px;}
+.p-stat{background:var(--surface);padding:13px 15px;}
+.p-stat .n{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:23px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;}
+.p-stat .n.hot{color:var(--beef);}
+.p-stat .n small{font-size:12px;color:var(--ink-2);font-weight:600;}
+.p-stat .l{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);margin-top:7px;line-height:1.3;}
+.subhead{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:4px 0 11px;}
+.catch{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:11.5px;background:var(--inset);border:1px solid var(--hairline);border-radius:7px;padding:4px 8px;color:var(--ink-2);}
+.chip b{color:var(--ink);font-weight:600;}
+.fac{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--hairline);}
+.fac:first-of-type{border-top:none;}
+.fac.dim{opacity:.42;}
+.fac .fdot{width:11px;height:11px;border-radius:50%;flex:none;margin-top:5px;}
+.fac .ftxt{flex:1;}
+.fac .fname{display:block;font-weight:600;font-size:15.5px;color:var(--ink);font-family:"Newsreader",serif;line-height:1.3;}
+.fac .fmeta{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-2);margin-top:3px;line-height:1.4;}
+.fac .fstat{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;flex:none;padding:3px 7px;border-radius:6px;margin-top:2px;}
+.fstat.op{background:var(--pasture-soft);color:var(--pasture);} .fstat.up{background:var(--ochre-soft);color:var(--ochre);}
+.fstat.p1{background:var(--rail-soft);color:var(--rail);} .fstat.p2{background:var(--plum-soft);color:var(--plum);}
+.p-blocked{background:var(--ochre-soft);border-left:3px solid var(--ochre);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13.5px;color:var(--ink);margin-bottom:16px;line-height:1.4;}
+
+/* matrix */
+.matrix-sec{padding-block:12px 56px;}
+.matrix-sec h2{font-size:clamp(22px,3vw,30px);}
+.msub{font-size:17px;color:var(--ink-2);max-width:58ch;margin:8px 0 22px;}
+.mtable-wrap{overflow-x:auto;border:1px solid var(--hairline);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);}
+table.mx{border-collapse:collapse;width:100%;min-width:660px;}
+table.mx th,table.mx td{padding:12px 10px;text-align:center;border-bottom:1px solid var(--hairline);}
+table.mx thead th{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.03em;color:var(--ink-2);font-weight:600;text-transform:uppercase;vertical-align:bottom;}
+table.mx tbody th{text-align:left;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:14.5px;color:var(--ink);white-space:nowrap;}
+table.mx tbody tr{cursor:pointer;transition:.1s;}
+table.mx tbody tr:hover{background:var(--inset);}
+table.mx tbody tr[aria-selected=true]{background:var(--beef-soft);}
+table.mx td .cell{width:15px;height:15px;border-radius:50%;display:inline-block;}
+table.mx td.dimc .cell{opacity:.28;}
+table.mx td .none{color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:13px;}
+.mx-catch{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-2);font-weight:400;display:block;margin-top:2px;}
+
+/* summary tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline);border-radius:14px;overflow:hidden;margin:26px 0 8px;}
+.stile{background:var(--surface);padding:18px 18px 16px;}
+.stile .n{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:30px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;}
+.stile .n small{font-size:14px;color:var(--ink-2);font-weight:600;}
+.stile .n.hot{color:var(--beef);}
+.stile .l{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);margin-top:8px;line-height:1.35;}
+
+footer{border-top:1px solid var(--hairline);padding-block:26px 54px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.6;}
+footer a{color:var(--rail);}
+.disc{font-family:"Newsreader",serif;font-style:italic;font-size:13px;color:var(--ink-3);max-width:70ch;margin-top:10px;}
+
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr;}
+  .panel{position:static;}
+  .legend{margin-left:0;width:100%;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><a href="./index.html">◆ Mutambo Research</a></div>
+      <nav style="display:flex;gap:20px;">
+        <a class="navlink" href="./index.html">Home</a>
+        <a class="navlink" href="./report.html">The $10B Report</a>
+        <a class="navlink" href="./rail.html" style="color:var(--beef)">Rail &amp; Facilities Map</a>
+      </nav>
+    </div>
+    <div class="head-main">
+      <div class="eyebrow">Interactive · Rail &amp; Cold-Chain Facilities</div>
+      <h1>Where the beef rails go — and what to build on them</h1>
+      <p class="sub">Every node on Zambia's rail corridors, sized by the cattle stock already in its catchment. Click a hub to see the facilities it needs — abattoir, feedlot, cold store, reefer loading, quarantine, power — scaled from today's herd to the $1B and $10B export targets.</p>
+
+      <div class="controls">
+        <div class="seg-wrap">
+          <span class="seg-label">Size facilities for</span>
+          <div class="seg" role="group" aria-label="Scenario">
+            <button data-sc="now" aria-pressed="false">Today's stock</button>
+            <button data-sc="p1" aria-pressed="true">Phase 1 · $1B</button>
+            <button data-sc="p10" aria-pressed="false">Scale · $10B</button>
+          </div>
+        </div>
+        <div class="legend" aria-label="Facility status legend">
+          <span><i class="dot op"></i> Operational</span>
+          <span><i class="dot up"></i> Upgrade</span>
+          <span><i class="dot p1"></i> Build · Phase 1</span>
+          <span><i class="dot p2"></i> Build · Phase 2+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="stage">
+    <!-- MAP -->
+    <div class="map-card" id="mapCard">
+      <svg id="map" viewBox="0 0 920 580" role="application" aria-label="Interactive rail map of Zambia. Use Tab to move between hubs and Enter to select.">
+        <!-- cattle belt -->
+        <ellipse cx="305" cy="440" rx="180" ry="86" fill="var(--beef)" opacity="0.08"></ellipse>
+        <text class="belt" x="470" y="452" text-anchor="start">Southern Province cattle belt</text>
+
+        <!-- corridors -->
+        <polyline class="corr spine" points="160,486 255,440 360,395 470,320 570,235 640,150"></polyline>
+        <path class="corr tazara" d="M570,235 C 690,210 780,190 852,158" marker-end="url(#arrH)"></path>
+        <path class="corr lobito" d="M640,150 C 430,90 190,95 70,138" marker-end="url(#arrH)"></path>
+        <path class="corr plan" d="M470,320 C 320,270 170,220 78,150"></path>
+        <path class="corr feeder" d="M300,480 L360,395"></path>
+        <path class="corr road" d="M150,330 C 280,330 380,325 470,320"></path>
+
+        <defs>
+          <marker id="arrH" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--ink-3)"></path></marker>
+        </defs>
+
+        <!-- port labels drawn first (behind nodes) -->
+        <g class="pmark"><text x="852" y="132" text-anchor="middle" fill="var(--rail)">Dar es Salaam</text><text class="cap" x="852" y="186" text-anchor="middle" fill="var(--ink-3)" font-size="10">Indian Ocean →</text></g>
+        <g class="pmark"><text x="70" y="120" text-anchor="middle" fill="var(--beef)">Lobito</text><text class="cap" x="70" y="172" text-anchor="middle" fill="var(--ink-3)" font-size="10">← Atlantic</text></g>
+
+        <!-- Livingstone terminus (non-interactive) -->
+        <g aria-hidden="true"><circle cx="160" cy="486" r="5" fill="var(--ink-3)"></circle><text x="160" y="507" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" fill="var(--ink-2)">Livingstone</text></g>
+
+        <!-- nodes injected by JS -->
+        <g id="nodes"></g>
+      </svg>
+      <div class="map-note">Node area ∝ current cattle stock in catchment. Shaded zone = Southern Province cattle belt. Schematic — not to geographic scale.</div>
+      <div class="tip" id="tip"></div>
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <aside class="panel" id="panel" aria-live="polite">
+      <!-- filled by JS -->
+    </aside>
+  </div>
+
+  <!-- MATRIX -->
+  <section class="matrix-sec">
+    <h2>The facility build, at a glance</h2>
+    <p class="msub">What each node needs, and the phase it comes online. Rows are ordered by the cattle stock in their catchment — the biggest herds get the flagship processing. Click a row to open it on the map.</p>
+    <div class="mtable-wrap">
+      <table class="mx" id="mx">
+        <thead>
+          <tr>
+            <th style="text-align:left">Node <span class="mx-catch">catchment stock</span></th>
+            <th>Export<br>abattoir</th><th>Feedlot</th><th>Cold<br>store</th><th>Reefer<br>rail</th><th>Quarantine<br>vaccination</th><th>Firm<br>power</th>
+          </tr>
+        </thead>
+        <tbody id="mxbody"></tbody>
+      </table>
+    </div>
+
+    <div class="tiles" id="tiles"></div>
+    <p class="disc" id="tileNote"></p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    MUTAMBO RESEARCH · ZAMBIA BEEF EXPORT INFRASTRUCTURE ·
+    <a href="./report.html">The $10B Report</a> ·
+    <a href="./index.html">Home</a>
+    <p class="disc">Catchment stock uses Zambia DLD 2024 district cattle figures (Monze, Itezhi-Tezhi, Namwala, Kalomo and neighbours) aggregated to each rail node; figures are estimates. Facility capacities are indicative build targets sized top-down from the $1B and $10B export goals — reaching them requires the herd growth and off-take gains set out in the main report. Not a government plan. Prepared September 2026.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- facility status codes -> label/color ----
+  var STAT={op:"Operational",up:"Upgrade",p1:"Build · Phase 1",p2:"Build · Phase 2+"};
+  var PHASE_ORDER={op:0,up:1,p1:1,p2:2}; // when it exists by scenario index (now=0,p1=1,p10=2)
+
+  // ---- nodes ----
+  // cap = indicative export kill capacity to build (head/yr); cold = cap*0.18 t
+  var NODES=[
+    {id:"choma",name:"Choma – Monze",corr:"spine",cc:"Zambia Railways spine",color:"beef",x:360,y:395,stock:620,
+      role:"Flagship export hub — heart of the herd, directly on the line.",status:"Greenfield build",
+      catch:[["Monze",285],["Choma",150],["Mazabuka",100],["Pemba / Gwembe",85]],
+      capP1:300,capP10:2400,
+      fac:[
+        {t:"Export abattoir (EU / halal)",s:"p1",m:"Multi-species kill floor + deboning"},
+        {t:"Blast-freeze + chilled store",s:"p1",m:"On-site cold, rail-loading dock"},
+        {t:"Feedlot / finishing",s:"p1",m:"Grain + fodder finishing yards"},
+        {t:"Reefer rail loading",s:"p1",m:"Refrigerated wagons onto the spine"},
+        {t:"Livestock ramp + resting pens",s:"p1",m:"Welfare-compliant lairage"},
+        {t:"Quarantine / vaccination",s:"p1",m:"Disease-free compartment control"},
+        {t:"Firm power (solar + battery)",s:"p1",m:"~20–35 MW, off-grid capable"},
+        {t:"Tannery / rendering",s:"p2",m:"Hide + by-product value-add"}
+      ]},
+    {id:"namwala",name:"Namwala – Itezhi-Tezhi",corr:"feeder",cc:"Feeder spur → Choma",color:"beef",x:300,y:480,stock:468,
+      role:"Feedlot & finishing cluster feeding a new rail spur to the Choma hub.",status:"Greenfield spur",
+      catch:[["Itezhi-Tezhi",284],["Namwala",184]],
+      capP1:220,capP10:1900,
+      fac:[
+        {t:"Feedlot / finishing",s:"p1",m:"Largest finishing capacity in the system"},
+        {t:"Livestock ramp + resting pens",s:"p1",m:"Aggregation from grazing plains"},
+        {t:"Quarantine / vaccination",s:"p1",m:"Movement control at the plains edge"},
+        {t:"Firm power (solar + battery)",s:"p1",m:"Water pumping + yards"},
+        {t:"Rail spur to Choma",s:"p2",m:"~55 km greenfield feeder line"},
+        {t:"Collection abattoir",s:"p2",m:"Secondary kill once volumes justify"}
+      ]},
+    {id:"kalomo",name:"Kalomo",corr:"spine",cc:"Zambia Railways spine",color:"beef",x:255,y:440,stock:290,
+      role:"Anchor abattoir — site of Zambia's first formal beef export to the DRC (Oct 2025).",status:"Operational · upgrade",
+      catch:[["Kalomo",176],["Kazungula",70],["Zimba",44]],
+      capP1:160,capP10:1200,
+      fac:[
+        {t:"Export abattoir (EU / halal)",s:"up",m:"Upgrade the existing plant to export grade"},
+        {t:"Livestock ramp + resting pens",s:"op",m:"In place, expand capacity"},
+        {t:"Blast-freeze + chilled store",s:"up",m:"Add blast tunnels + rail dock"},
+        {t:"Reefer rail loading",s:"p1",m:"Connect to spine reefer service"},
+        {t:"Quarantine / vaccination",s:"p1",m:"Compartment certification"},
+        {t:"Firm power (solar + battery)",s:"p1",m:"Replace grid dependence"},
+        {t:"Feedlot / finishing",s:"p2",m:"Add finishing to lift carcass weight"}
+      ]},
+    {id:"kapiri",name:"Kapiri Mposhi",corr:"junction",cc:"Spine ⟂ TAZARA",color:"ochre",x:570,y:235,stock:250,
+      role:"East–west reefer pivot — where the spine meets TAZARA to Dar es Salaam.",status:"Transload build",
+      catch:[["Central Prov. herd",250]],
+      capP1:120,capP10:1000,
+      fac:[
+        {t:"Reefer transload terminal",s:"p1",m:"Spine ↔ TAZARA container transfer"},
+        {t:"Chilled buffer store",s:"p1",m:"Hold-and-consolidate for eastbound trains"},
+        {t:"Livestock ramp + resting pens",s:"p1",m:"Central Province aggregation"},
+        {t:"Firm power (solar + battery)",s:"p1",m:"Terminal + reefer plug-in power"},
+        {t:"Collection abattoir",s:"p2",m:"Kill for Central Province volumes"}
+      ]},
+    {id:"lusaka",name:"Lusaka – Kafue",corr:"spine",cc:"Zambia Railways spine",color:"pasture",x:470,y:320,stock:120,
+      role:"Consolidation + air-freight cold for premium chilled cuts via KKIA.",status:"Consolidation build",
+      catch:[["Peri-urban + Central spill",120]],
+      capP1:90,capP10:700,
+      fac:[
+        {t:"Chilled consolidation centre",s:"p1",m:"Aggregate + grade for export"},
+        {t:"Air-freight cold (KKIA)",s:"p1",m:"High-value chilled cuts by air"},
+        {t:"Reefer rail loading",s:"p1",m:"Onward to both ocean gates"},
+        {t:"Livestock ramp + resting pens",s:"p1",m:"Regional collection"},
+        {t:"Firm power (solar + battery)",s:"p1",m:"Cold + processing load"}
+      ]},
+    {id:"ndola",name:"Ndola – Kitwe",corr:"spine",cc:"Spine → Lobito interchange",color:"pasture",x:640,y:150,stock:40,
+      role:"Copperbelt market + interchange to the Lobito Corridor and the DRC.",status:"Interchange build",
+      catch:[["Copperbelt local",40]],
+      capP1:40,capP10:500,
+      fac:[
+        {t:"Distribution cold store",s:"p1",m:"Serve Copperbelt + DRC demand"},
+        {t:"Reefer interchange (Lobito)",s:"p1",m:"Westbound reefer to the Atlantic"},
+        {t:"Firm power (solar + battery)",s:"p1",m:"Cold store load"},
+        {t:"Export abattoir (EU / halal)",s:"p2",m:"Kill for northern volumes at scale"}
+      ]},
+    {id:"western",name:"Mongu – Kaoma",corr:"western",cc:"Western Province · off-rail",color:"plum",x:150,y:330,stock:430,
+      role:"Western Province gateway — a large traditional herd behind Zambia's oldest FMD zone.",status:"Phase 2+ · disease-gated",
+      blocked:"Foot-and-mouth endemic. Exports only after disease zoning + vaccination and, later, rail. Vaccinated/domestic supply first.",
+      catch:[["Western Prov. herd",430]],
+      capP1:0,capP10:1600,
+      fac:[
+        {t:"Quarantine / vaccination",s:"p2",m:"The critical unlock — FMD control"},
+        {t:"Feedlot / finishing",s:"p2",m:"Finish behind the disease line"},
+        {t:"Road → rail reefer link",s:"p2",m:"Truck to spine, then rail east/west"},
+        {t:"Export abattoir (EU / halal)",s:"p2",m:"Once zone status is certified"},
+        {t:"Firm power (solar + battery)",s:"p2",m:"Off-grid processing + cold"}
+      ]},
+    {id:"dar",name:"Dar es Salaam",corr:"port",cc:"Indian Ocean gate · TAZARA",color:"rail",x:852,y:158,stock:0,port:true,
+      role:"Eastern ocean gate. Opens the Gulf (halal) and Asian markets.",status:"Port cold build",
+      catch:[["— seaport —",0]],
+      capP1:930,capP10:9300,capIsFlow:true,
+      fac:[
+        {t:"Port cold store",s:"p1",m:"Reefer stacking + vessel loading"},
+        {t:"Reefer handling yard",s:"p1",m:"TAZARA arrival → quay"}
+      ]},
+    {id:"lobito",name:"Lobito",corr:"port",cc:"Atlantic gate · Benguela",color:"beef",x:70,y:138,stock:0,port:true,
+      role:"Western ocean gate. Shortens the route to Europe and the Americas.",status:"Port cold · Phase 2",
+      catch:[["— seaport —",0]],
+      capP1:0,capP10:9300,capIsFlow:true,
+      fac:[
+        {t:"Port cold store",s:"p2",m:"Ramps with the Lobito Corridor (~2030)"},
+        {t:"Reefer handling yard",s:"p2",m:"Benguela arrival → quay"}
+      ]}
+  ];
+
+  // matrix columns -> facility keyword match
+  var MXCOLS=[
+    {k:"abattoir",match:/abattoir/i},
+    {k:"feedlot",match:/feedlot/i},
+    {k:"cold",match:/cold|blast|chilled|store/i},
+    {k:"reefer",match:/reefer/i},
+    {k:"quar",match:/quarantine/i},
+    {k:"power",match:/power/i}
+  ];
+
+  var SC="p1"; // scenario: now|p1|p10
+  var SCIDX={now:0,p1:1,p10:2};
+  var selected="choma";
+
+  var svgNS="http://www.w3.org/2000/svg";
+  var nodesG=document.getElementById("nodes");
+  var tip=document.getElementById("tip");
+  var mapCard=document.getElementById("mapCard");
+
+  function fmtHead(k){ // k in thousands
+    if(k>=1000) return (k/1000).toLocaleString('en-US',{maximumFractionDigits:1})+"M";
+    return k+"k";
+  }
+  function capFor(n){ return SC==="now"?0:(SC==="p1"?n.capP1:n.capP10); }
+  function coldFor(n){ return Math.round(capFor(n)*0.18); } // kt/yr (cap in k head *0.18t=kt)
+
+  // ---- build map nodes ----
+  NODES.forEach(function(n){
+    var g=document.createElementNS(svgNS,"g");
+    g.setAttribute("class","node"+(n.port?" port":""));
+    g.setAttribute("data-id",n.id);
+    g.setAttribute("tabindex","0");
+    g.setAttribute("role","button");
+    g.setAttribute("aria-label",n.name+", "+(n.port?"seaport":fmtHead(n.stock)+" head in catchment"));
+    var col="var(--"+n.color+")";
+    if(n.port){
+      var rc=document.createElementNS(svgNS,"rect");
+      rc.setAttribute("x",n.x-8);rc.setAttribute("y",n.y-8);rc.setAttribute("width",16);rc.setAttribute("height",16);
+      rc.setAttribute("rx",3);rc.setAttribute("fill",col);
+      g.appendChild(rc);
+    }else{
+      var r=5+Math.sqrt(n.stock)*0.62;
+      var ring=document.createElementNS(svgNS,"circle");
+      ring.setAttribute("class","ring");ring.setAttribute("cx",n.x);ring.setAttribute("cy",n.y);ring.setAttribute("r",r+6);ring.setAttribute("stroke","var(--beef)");ring.setAttribute("fill","none");
+      g.appendChild(ring);
+      var c=document.createElementNS(svgNS,"circle");
+      c.setAttribute("class","mk");c.setAttribute("cx",n.x);c.setAttribute("cy",n.y);c.setAttribute("r",r);c.setAttribute("fill",col);
+      g.appendChild(c);
+      var lab=document.createElementNS(svgNS,"text");
+      lab.setAttribute("class","lab");lab.setAttribute("x",n.x);lab.setAttribute("y",n.y+r+15);lab.setAttribute("text-anchor","middle");
+      lab.textContent=n.name.replace(" – "," · ");
+      g.appendChild(lab);
+    }
+    // big hit target
+    var hit=document.createElementNS(svgNS,"circle");
+    hit.setAttribute("class","hit");hit.setAttribute("cx",n.x);hit.setAttribute("cy",n.y);hit.setAttribute("r",22);
+    g.appendChild(hit);
+    g.addEventListener("click",function(){select(n.id);});
+    g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();select(n.id);}});
+    g.addEventListener("mouseenter",function(e){showTip(n,e);});
+    g.addEventListener("mousemove",function(e){showTip(n,e);});
+    g.addEventListener("mouseleave",hideTip);
+    g.addEventListener("focus",function(e){showTip(n,e);});
+    g.addEventListener("blur",hideTip);
+    nodesG.appendChild(g);
+  });
+
+  function showTip(n,e){
+    var rect=mapCard.getBoundingClientRect();
+    var cx,cy;
+    if(e && e.clientX){cx=e.clientX-rect.left;cy=e.clientY-rect.top;}
+    else{ // focus: use node coords mapped to px
+      var sc=rect.width/920; cx=n.x*sc; cy=n.y*sc;
+    }
+    tip.style.left=cx+"px"; tip.style.top=cy+"px";
+    var line = n.port ? "seaport" : fmtHead(n.stock)+" head · catchment";
+    var cap = capFor(n);
+    var flow = n.capIsFlow ? "throughput" : "kill capacity";
+    var capline = SC==="now" ? "" : "<br>"+fmtHead(cap)+"/yr "+flow;
+    tip.innerHTML="<b>"+n.name+"</b><br>"+line+capline;
+    tip.style.opacity="1";
+  }
+  function hideTip(){tip.style.opacity="0";}
+
+  // ---- detail panel ----
+  function facVisible(s){ // is facility online by current scenario?
+    return PHASE_ORDER[s] <= SCIDX[SC];
+  }
+  function renderPanel(){
+    var n=NODES.find(function(x){return x.id===selected;});
+    var col="var(--"+n.color+")";
+    var cap=capFor(n), cold=coldFor(n);
+    var flowLabel=n.capIsFlow?"Throughput / yr":"Kill capacity / yr";
+    var stockStat = n.port
+      ? '<div class="p-stat"><div class="n">'+(n.id==="dar"?"E":"W")+'</div><div class="l">Ocean gate</div></div>'
+      : '<div class="p-stat"><div class="n">'+fmtHead(n.stock)+'<small> head</small></div><div class="l">Cattle stock in catchment</div></div>';
+    var capStat = SC==="now"
+      ? '<div class="p-stat"><div class="n">pilot</div><div class="l">'+flowLabel+' today</div></div>'
+      : '<div class="p-stat"><div class="n hot">'+fmtHead(cap)+'<small>/yr</small></div><div class="l">'+flowLabel+' to build</div></div>';
+    var coldStat = (SC==="now"||n.capIsFlow&&false)
+      ? '' : '';
+    var stats='<div class="p-stats">'+stockStat+capStat+
+      (SC!=="now"? '<div class="p-stat"><div class="n">'+fmtHead(cold)+'<small> kt</small></div><div class="l">Cold store / yr ('+ (cap? "≈180kg/head":"") +')</div></div>'
+                 : '<div class="p-stat"><div class="n">—</div><div class="l">Cold store / yr</div></div>')+
+      '<div class="p-stat"><div class="n" style="font-size:16px;line-height:1.2">'+n.status+'</div><div class="l">Status</div></div>'+
+      '</div>';
+
+    var chips=n.catch.filter(function(c){return c[1]>0;}).map(function(c){
+      return '<span class="chip"><b>'+c[0]+'</b> '+c[1]+'k</span>';
+    }).join("");
+    var catchBlock = chips ? '<div class="subhead">Catchment</div><div class="catch">'+chips+'</div>' : '';
+
+    var blocked = n.blocked ? '<div class="p-blocked">⚠ '+n.blocked+'</div>' : '';
+
+    var facs=n.fac.map(function(f){
+      var vis=facVisible(f.s);
+      return '<div class="fac'+(vis?'':' dim')+'">'+
+        '<span class="fdot dot '+f.s+'" style=""></span>'+
+        '<span class="ftxt"><span class="fname">'+f.t+'</span><span class="fmeta">'+f.m+'</span></span>'+
+        '<span class="fstat '+f.s+'">'+ (f.s==="op"?"Have it":f.s==="up"?"Upgrade":f.s==="p1"?"Phase 1":"Phase 2+") +'</span>'+
+      '</div>';
+    }).join("");
+
+    document.getElementById("panel").innerHTML=
+      '<div class="p-head" style="border-top:4px solid '+col+'">'+
+        '<div class="p-corr" style="color:'+col+'">'+n.cc+'</div>'+
+        '<h2 class="p-name">'+n.name+'</h2>'+
+        '<p class="p-role">'+n.role+'</p>'+
+      '</div>'+
+      '<div class="p-body">'+stats+blocked+catchBlock+
+        '<div class="subhead">Facilities '+(SC==="now"?"required (all to build)":SC==="p1"?"· solid = live by Phase 1":"· full build")+'</div>'+
+        facs+
+      '</div>';
+  }
+
+  // ---- matrix ----
+  function renderMatrix(){
+    var body=document.getElementById("mxbody");
+    var rows=NODES.filter(function(n){return !n.port;})
+      .slice().sort(function(a,b){return b.stock-a.stock;});
+    body.innerHTML=rows.map(function(n){
+      var cells=MXCOLS.map(function(col){
+        var f=n.fac.find(function(x){return col.match.test(x.t);});
+        if(!f) return '<td><span class="none">·</span></td>';
+        var vis=facVisible(f.s);
+        return '<td class="'+(vis?'':'dimc')+'"><span class="cell dot '+f.s+'" title="'+STAT[f.s]+'"></span></td>';
+      }).join("");
+      var sel=n.id===selected?' aria-selected="true"':'';
+      return '<tr data-id="'+n.id+'"'+sel+'><th scope="row">'+n.name+
+        '<span class="mx-catch">'+fmtHead(n.stock)+' head</span></th>'+cells+'</tr>';
+    }).join("");
+    Array.prototype.forEach.call(body.querySelectorAll("tr"),function(tr){
+      tr.addEventListener("click",function(){select(tr.getAttribute("data-id"));});
+    });
+  }
+
+  // ---- summary tiles ----
+  function renderTiles(){
+    var inland=NODES.filter(function(n){return !n.port;});
+    var totalCap = inland.reduce(function(s,n){return s+capFor(n);},0);
+    var totalCold=Math.round(totalCap*0.18);
+    var hubs = SC==="now"?0:inland.filter(function(n){return capFor(n)>0;}).length;
+    var reefer = SC==="now"?0:NODES.filter(function(n){return n.fac.some(function(f){return /reefer/i.test(f.t)&&facVisible(f.s);});}).length;
+    var quar = NODES.filter(function(n){return n.fac.some(function(f){return /quarantine/i.test(f.t)&&facVisible(f.s);});}).length;
+    var mw = SC==="now"?"—":SC==="p1"?"60–90":"150–250";
+    var tiles=[
+      {n:fmtHead(totalCap),u:"/yr",l:"Export kill capacity to build",hot:true},
+      {n:fmtHead(totalCold),u:" kt",l:"Cold-store throughput / yr",hot:false},
+      {n:hubs,u:"",l:"Processing hubs online",hot:false},
+      {n:reefer,u:"",l:"Reefer rail terminals",hot:false},
+      {n:quar,u:"",l:"Quarantine / vaccination stations",hot:false},
+      {n:mw,u:" MW",l:"Firm solar+storage power",hot:false}
+    ];
+    document.getElementById("tiles").innerHTML=tiles.map(function(t){
+      return '<div class="stile"><div class="n'+(t.hot?' hot':'')+'">'+t.n+'<small>'+t.u+'</small></div><div class="l">'+t.l+'</div></div>';
+    }).join("");
+    var noteMap={now:"Today: essentially a pilot — one export consignment has moved. The map shows where facilities must be built.",
+      p1:"Phase 1 ($1B): concentrate on the Southern Province heartland already on the spine; Western Province stays domestic behind the disease line.",
+      p10:"Scale ($10B): every corridor node at full build, Western Province unlocked, both ocean gates live. Totals reflect ~9.3M head/yr of export slaughter."};
+    document.getElementById("tileNote").textContent=noteMap[SC];
+  }
+
+  // ---- select + scenario ----
+  function select(id){
+    selected=id;
+    Array.prototype.forEach.call(document.querySelectorAll(".node"),function(g){
+      g.setAttribute("aria-selected", g.getAttribute("data-id")===id ? "true":"false");
+    });
+    renderPanel(); renderMatrix(); hideTip();
+    var card=document.getElementById("panel");
+    if(window.innerWidth<=860){card.scrollIntoView({behavior:"smooth",block:"start"});}
+  }
+  function setScenario(sc){
+    SC=sc;
+    Array.prototype.forEach.call(document.querySelectorAll(".seg button"),function(b){
+      b.setAttribute("aria-pressed", b.getAttribute("data-sc")===sc ? "true":"false");
+    });
+    renderPanel(); renderMatrix(); renderTiles();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".seg button"),function(b){
+    b.addEventListener("click",function(){setScenario(b.getAttribute("data-sc"));});
+  });
+
+  // init
+  select("choma"); setScenario("p1");
+})();
+</script>
+</body>
+</html>
