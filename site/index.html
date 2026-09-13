@@ -1,0 +1,694 @@
+<title>Zambia at $10B Beef</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --bg:#F6F1E7; --surface:#FDFBF5; --surface-2:#EFE7D6; --inset:#F1EADB;
+  --ink:#241E17; --ink-2:#6E6353; --ink-3:#948976;
+  --hairline:#E1D8C5; --hairline-2:#D3C7AE;
+  --beef:#A8321E; --rail:#1D6FA5; --pasture:#4E7A3A; --plum:#8A3E86; --ochre:#B8841E;
+  --beef-soft:#EBD6CF; --rail-soft:#D5E4EE; --ochre-soft:#F0E4C8;
+  /* sequential ochre→oxblood ramp for the capital stack */
+  --s1:#E7C77A; --s2:#D8A24A; --s3:#C67C2C; --s4:#B15A22; --s5:#9C3E1C; --s6:#822C17;
+  --shadow:0 1px 2px rgba(40,30,15,.06),0 8px 26px rgba(40,30,15,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+    --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+    --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+    --beef-soft:#3A231C; --rail-soft:#16303F; --ochre-soft:#33290F;
+    --s1:#6E5C2E; --s2:#8A6A2A; --s3:#A9722B; --s4:#C06238; --s5:#D06A4A; --s6:#DB6048;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16120C; --surface:#201B13; --surface-2:#2B2318; --inset:#1C1710;
+  --ink:#ECE4D4; --ink-2:#AA9D86; --ink-3:#877C67; --hairline:#362F1F; --hairline-2:#4A4029;
+  --beef:#DB6048; --rail:#3E93CB; --pasture:#5C9E42; --plum:#B06AAA; --ochre:#E0A63E;
+  --beef-soft:#3A231C; --rail-soft:#16303F; --ochre-soft:#33290F;
+  --s1:#6E5C2E; --s2:#8A6A2A; --s3:#A9722B; --s4:#C06238; --s5:#D06A4A; --s6:#DB6048;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto;
+  font-size:18px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:22px;}
+.col{max-width:720px;}
+h1,h2,h3,.display{font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-weight:800;
+  line-height:1.02;letter-spacing:-.015em;text-wrap:balance;}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);}
+a{color:var(--rail);text-underline-offset:2px;}
+p{margin:0 0 1.1em;}
+strong{font-weight:600;color:var(--ink);}
+sup{font-size:.62em;font-weight:600;color:var(--ochre);font-family:"IBM Plex Mono",monospace;
+  padding-left:1px;line-height:0;}
+
+/* ---- masthead ---- */
+.mast{position:relative;overflow:hidden;border-bottom:1px solid var(--hairline);}
+.mast-inner{padding-block:64px 40px;position:relative;z-index:2;}
+.kicker{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:26px;}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-2);border:1px solid var(--hairline-2);border-radius:100px;padding:5px 11px;}
+.mast h1{font-size:clamp(40px,7.4vw,84px);margin:0;color:var(--ink);}
+.mast h1 .em{color:var(--beef);}
+.dek{font-size:clamp(19px,2.4vw,24px);line-height:1.4;color:var(--ink-2);max-width:33ch;
+  margin:22px 0 0;font-weight:400;}
+.mast-fig{position:absolute;inset:0;z-index:1;opacity:.9;}
+.byline{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;
+  font-size:12.5px;color:var(--ink-3);letter-spacing:.02em;}
+.byline b{color:var(--ink);font-weight:600;}
+
+/* ---- section scaffold ---- */
+section{padding-block:60px;border-bottom:1px solid var(--hairline);}
+.sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:8px;}
+.sec-num{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;color:var(--beef);
+  letter-spacing:.05em;flex:none;padding-top:6px;}
+.sec-head h2{font-size:clamp(27px,4vw,40px);margin:0;}
+.lede{font-size:20px;color:var(--ink-2);max-width:34ch;margin-left:auto;margin-right:auto;}
+.standfirst{font-size:20.5px;line-height:1.5;color:var(--ink);max-width:44ch;margin:0 0 30px;}
+.standfirst .em{color:var(--beef);font-weight:600;}
+
+/* ---- stat tiles ---- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;
+  background:var(--hairline);border:1px solid var(--hairline);border-radius:14px;overflow:hidden;margin:8px 0 4px;}
+.tile{background:var(--surface);padding:20px 20px 18px;}
+.tile .n{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:34px;line-height:1;
+  color:var(--ink);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+.tile .n .u{font-size:16px;color:var(--ink-2);font-weight:600;margin-left:2px;}
+.tile .l{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--ink-2);margin-top:9px;line-height:1.35;}
+.tile.hot .n{color:var(--beef);}
+
+/* ---- figure / panels ---- */
+figure{margin:30px 0 6px;}
+.panel{background:var(--surface);border:1px solid var(--hairline);border-radius:16px;
+  padding:26px 26px 20px;box-shadow:var(--shadow);}
+.panel.flush{padding:0;overflow:hidden;}
+figcaption{font-size:14.5px;color:var(--ink-2);line-height:1.5;margin-top:14px;font-family:"Newsreader",serif;}
+figcaption b{color:var(--ink);font-weight:600;}
+.fig-title{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;
+  letter-spacing:-.01em;color:var(--ink);margin-bottom:2px;}
+.fig-sub{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;}
+svg{display:block;max-width:100%;height:auto;overflow:visible;}
+text{font-family:"IBM Plex Mono",monospace;}
+.axis{fill:var(--ink-3);font-size:12px;}
+.axlabel{fill:var(--ink);font-size:12.5px;font-weight:500;}
+.axval{fill:var(--ink);font-size:13px;font-weight:600;}
+.grid{stroke:var(--hairline);stroke-width:1;}
+.baseline{stroke:var(--hairline-2);stroke-width:1.5;}
+.b-beef{fill:var(--beef);} .b-rail{fill:var(--rail);} .b-mute{fill:var(--ink-3);}
+.s1{fill:var(--s1)} .s2{fill:var(--s2)} .s3{fill:var(--s3)} .s4{fill:var(--s4)} .s5{fill:var(--s5)} .s6{fill:var(--s6)}
+
+/* ---- callout / assumption box ---- */
+.note{border-left:3px solid var(--ochre);background:var(--ochre-soft);border-radius:0 10px 10px 0;
+  padding:16px 20px;margin:26px 0;font-size:16px;line-height:1.5;color:var(--ink);}
+.note .h{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ochre);font-weight:600;display:block;margin-bottom:6px;}
+
+/* ---- two-column prose grids ---- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:30px 44px;align-items:start;}
+.grid2 h3,.cardgrid h3{font-size:19px;margin:0 0 6px;}
+.grid2 p{font-size:16.5px;color:var(--ink-2);}
+
+/* ---- corridor schematic ---- */
+.map-legend{display:flex;gap:20px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:12px;
+  color:var(--ink-2);padding:16px 26px 4px;letter-spacing:.02em;}
+.map-legend span{display:inline-flex;align-items:center;gap:7px;}
+.sw{width:15px;height:4px;border-radius:2px;display:inline-block;}
+.sw.dot{width:10px;height:10px;border-radius:50%;}
+
+/* ---- hub cards ---- */
+.cardgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px;margin-top:8px;}
+.card{background:var(--surface);border:1px solid var(--hairline);border-radius:13px;padding:17px 18px;}
+.card .role{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ochre);font-weight:600;}
+.card .place{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:19px;margin:4px 0 6px;color:var(--ink);}
+.card p{font-size:14.5px;color:var(--ink-2);margin:0;line-height:1.45;}
+.card .prov{display:inline-block;margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  color:var(--ink-3);border:1px solid var(--hairline-2);border-radius:6px;padding:2px 7px;letter-spacing:.03em;}
+
+/* ---- calculator ---- */
+.calc{display:grid;grid-template-columns:1.05fr 1fr;gap:0;border:1px solid var(--hairline);
+  border-radius:16px;overflow:hidden;box-shadow:var(--shadow);}
+.calc-in{background:var(--inset);padding:26px 26px 30px;}
+.calc-out{background:var(--surface);padding:26px;display:flex;flex-direction:column;justify-content:center;gap:0;border-left:1px solid var(--hairline);}
+.ctrl{margin-bottom:22px;}
+.ctrl:last-child{margin-bottom:0;}
+.ctrl label{display:flex;justify-content:space-between;align-items:baseline;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.03em;color:var(--ink-2);margin-bottom:9px;}
+.ctrl label .v{color:var(--beef);font-weight:600;font-size:14px;}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:5px;border-radius:5px;
+  background:var(--hairline-2);outline:none;margin:0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;
+  background:var(--beef);cursor:pointer;border:3px solid var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.25);}
+input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;background:var(--beef);cursor:pointer;border:3px solid var(--surface);}
+input[type=range]:focus-visible{box-shadow:0 0 0 3px var(--beef-soft);}
+.out-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:11px 0;
+  border-bottom:1px dashed var(--hairline);}
+.out-row:last-child{border-bottom:none;}
+.out-row .k{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.02em;color:var(--ink-2);max-width:20ch;}
+.out-row .val{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:29px;color:var(--ink);
+  font-variant-numeric:tabular-nums;line-height:1;}
+.out-row.head .val{color:var(--beef);font-size:34px;}
+.out-row .val small{font-size:14px;color:var(--ink-2);font-weight:600;}
+
+/* ---- roadmap ---- */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px;}
+.phase{background:var(--surface);border:1px solid var(--hairline);border-radius:14px;padding:20px;position:relative;}
+.phase .pt{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;color:var(--ink-3);}
+.phase .py{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:30px;color:var(--beef);margin:6px 0 2px;letter-spacing:-.02em;}
+.phase .pn{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:12px;}
+.phase ul{margin:0;padding-left:17px;font-size:14.5px;color:var(--ink-2);line-height:1.5;}
+.phase li{margin-bottom:6px;}
+.phase li::marker{color:var(--ochre);}
+
+/* ---- sources / footer ---- */
+.srcs{columns:2;column-gap:40px;font-size:13.5px;line-height:1.5;color:var(--ink-2);}
+.srcs li{break-inside:avoid;margin-bottom:11px;}
+.srcs a{color:var(--rail);}
+.disclaimer{font-size:13px;color:var(--ink-3);line-height:1.5;max-width:64ch;margin-top:26px;font-style:italic;}
+.foot{padding-block:34px 60px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;}
+
+@media (max-width:780px){
+  body{font-size:17px;}
+  .grid2{grid-template-columns:1fr;gap:24px;}
+  .calc{grid-template-columns:1fr;}
+  .calc-out{border-left:none;border-top:1px solid var(--hairline);}
+  .phases{grid-template-columns:1fr;}
+  .srcs{columns:1;}
+  section{padding-block:46px;}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+
+<div class="mast">
+  <svg class="mast-fig" viewBox="0 0 1140 340" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="var(--beef)" stop-opacity=".06"/>
+        <stop offset="1" stop-color="var(--rail)" stop-opacity=".05"/>
+      </linearGradient>
+    </defs>
+    <rect width="1140" height="340" fill="url(#mg)"/>
+    <!-- faint corridor lines -->
+    <path d="M-20 250 Q 340 120 640 150 T 1200 70" fill="none" stroke="var(--rail)" stroke-width="1.4" stroke-opacity=".28" stroke-dasharray="2 7"/>
+    <path d="M-20 300 Q 300 250 620 200 T 1200 150" fill="none" stroke="var(--beef)" stroke-width="1.4" stroke-opacity=".26" stroke-dasharray="2 7"/>
+    <path d="M-20 200 Q 400 60 720 90 T 1200 30" fill="none" stroke="var(--ochre)" stroke-width="1.4" stroke-opacity=".22" stroke-dasharray="2 7"/>
+  </svg>
+  <div class="wrap mast-inner">
+    <div class="kicker">
+      <span class="eyebrow">Zambia · Livestock Economy</span>
+      <span class="tag">Research &amp; Deployment Brief</span>
+      <span class="tag">Sept 2026</span>
+    </div>
+    <h1>What does a <span class="em">$10&nbsp;billion</span> beef export industry mean for Zambia?</h1>
+    <p class="dek">The country is chasing its first $1&nbsp;billion. This is a map of the order of magnitude beyond it — the herd, the rails, the cold chain, the power, and the money.</p>
+    <div class="byline">
+      <span><b>Scope</b>&nbsp;&nbsp;Herd · Rail · Logistics · Energy · Finance</span>
+      <span><b>Anchor herd</b>&nbsp;&nbsp;5.1M → ~46M cattle</span>
+      <span><b>Ocean gates</b>&nbsp;&nbsp;TAZARA · Lobito</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- 01 THE PROMPT ------------------------------------------------->
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><h2>From a slogan to a scale</h2></div>
+  <div class="col">
+    <p class="standfirst">Zambia has set itself a real target: <span class="em">at least US$1&nbsp;billion in beef exports a year</span> by around 2031. The first formal consignment — 55 head from Namwala, slaughtered at Kalomo — crossed into the DRC in October 2025.<sup>1,2</sup></p>
+    <p>That is the on-ramp. The question here is the destination one order of magnitude further out: a <strong>$10&nbsp;billion</strong> beef export economy. Not as a forecast, but as a way to see the whole system at once — because at $10B the constraints stop being about marketing and start being about biology, steel, and electricity.</p>
+    <p>The headline finding is simple and sobering. A $1B industry is a <em>commercial upgrade</em> of what Zambia already has. A $10B industry is a <em>national transformation</em> on the scale of two to three decades: a herd approaching Argentina's, export earnings approaching Australia's, and a cold-chain-grade logistics network laid over rails that were built to move copper, not chilled meat.</p>
+  </div>
+
+  <figure>
+    <div class="tiles">
+      <div class="tile"><div class="n">5.1<span class="u">M</span></div><div class="l">National cattle herd, 2024</div></div>
+      <div class="tile"><div class="n">84<span class="u">%</span></div><div class="l">Held in the traditional / smallholder sector</div></div>
+      <div class="tile"><div class="n">~8<span class="u">%</span></div><div class="l">Est. commercial off-take rate</div></div>
+      <div class="tile"><div class="n">20–35<span class="u">%</span></div><div class="l">Calf mortality in traditional herds</div></div>
+      <div class="tile hot"><div class="n">$1<span class="u">B</span></div><div class="l">Stated export target · ~2031</div></div>
+      <div class="tile hot"><div class="n">$10<span class="u">B</span></div><div class="l">The scale examined here</div></div>
+    </div>
+    <figcaption><b>The starting position.</b> A large herd held mostly for draft power, milk and savings — not meat — with low off-take and high losses. The gap between what the herd <em>is</em> and what an export industry <em>needs</em> is the whole story.<sup>1,3,4</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 02 THE $10B MATH ---------------------------------------------->
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><h2>The arithmetic of $10&nbsp;billion</h2></div>
+  <div class="col">
+    <p class="standfirst">Work backwards from the dollar figure and the physical demands become unavoidable. Ten billion dollars of beef is roughly <span class="em">1.7 million tonnes of product</span> a year — and behind every tonne stand live animals, off-take, and a herd big enough to sustain the slaughter.</p>
+    <p>At an internationally traded price of about <strong>US$6,000 a tonne</strong> for deboned, chilled/frozen export beef,<sup>5,6</sup> $10B is <strong>~1.67&nbsp;million tonnes</strong>. If each slaughtered animal yields ~180&nbsp;kg of saleable export beef — itself requiring carcass weights roughly double today's smallholder average — that is <strong>~9.3&nbsp;million head slaughtered for export every year</strong>. Add domestic and regional non-premium demand and total commercial slaughter runs near <strong>13&nbsp;million head a year</strong>.</p>
+    <p>A herd can only be slaughtered as fast as it reproduces. At a world-class off-take of ~28%, sustaining 13M head of annual slaughter requires a national herd of roughly <strong>46&nbsp;million cattle</strong> — about <strong>nine times</strong> today's. Move the sliders below to see how sensitive that is.</p>
+  </div>
+
+  <figure>
+    <div class="calc" role="group" aria-label="Scenario model">
+      <div class="calc-in">
+        <div class="fig-title">Reverse-engineer the herd</div>
+        <div class="fig-sub">Set the targets — the model solves for animals</div>
+        <div class="ctrl">
+          <label for="s-usd">Export earnings target <span class="v" id="v-usd">$10.0B</span></label>
+          <input type="range" id="s-usd" min="1" max="15" step="0.5" value="10">
+        </div>
+        <div class="ctrl">
+          <label for="s-price">Realised price <span class="v" id="v-price">$6,000 / t</span></label>
+          <input type="range" id="s-price" min="4000" max="8000" step="250" value="6000">
+        </div>
+        <div class="ctrl">
+          <label for="s-kg">Saleable beef per head <span class="v" id="v-kg">180 kg</span></label>
+          <input type="range" id="s-kg" min="120" max="240" step="10" value="180">
+        </div>
+        <div class="ctrl">
+          <label for="s-off">Sustainable off-take <span class="v" id="v-off">28%</span></label>
+          <input type="range" id="s-off" min="12" max="35" step="1" value="28">
+        </div>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <div class="out-row"><span class="k">Export beef required</span><span class="val" id="o-t">1.67<small> Mt/yr</small></span></div>
+        <div class="out-row"><span class="k">Head slaughtered for export</span><span class="val" id="o-hx">9.3<small> M/yr</small></span></div>
+        <div class="out-row head"><span class="k">National herd implied</span><span class="val" id="o-herd">46<small> M head</small></span></div>
+        <div class="out-row"><span class="k">Multiple of the 2024 herd</span><span class="val" id="o-mult">9.1<small>×</small></span></div>
+      </div>
+    </div>
+    <figcaption><b>Illustrative model, not a forecast.</b> Assumes total slaughter ≈ 1.4× export slaughter (domestic + regional) and a single steady-state off-take. The point is directional: $10B is a herd-scale problem before it is anything else.</figcaption>
+  </figure>
+
+  <figure>
+    <div class="panel">
+      <div class="fig-title">A $10B herd puts Zambia in different company</div>
+      <div class="fig-sub">National cattle herd · million head</div>
+      <svg viewBox="0 0 720 232" role="img" aria-label="Herd comparison: Zambia 2024 5.1M, Australia 28M, Zambia at $10B target 46M, Argentina 53M">
+        <!-- scale: 0..56M over x 150..690 (540px) -->
+        <line class="grid" x1="150" y1="16" x2="150" y2="204"/>
+        <line class="grid" x1="304" y1="16" x2="304" y2="204"/>
+        <line class="grid" x1="459" y1="16" x2="459" y2="204"/>
+        <line class="grid" x1="613" y1="16" x2="613" y2="204"/>
+        <text class="axis" x="150" y="222" text-anchor="middle">0</text>
+        <text class="axis" x="304" y="222" text-anchor="middle">16M</text>
+        <text class="axis" x="459" y="222" text-anchor="middle">32M</text>
+        <text class="axis" x="613" y="222" text-anchor="middle">48M</text>
+        <!-- rows: y 28,74,120,166 ; height 34 ; x0=150 ; px per M = 540/56=9.643 -->
+        <!-- Zambia 2024 5.1 -->
+        <text class="axlabel" x="142" y="49" text-anchor="end">Zambia 2024</text>
+        <rect class="b-mute" x="150" y="30" width="49" height="30" rx="4"/>
+        <text class="axval" x="207" y="49">5.1M</text>
+        <!-- Australia 28 -->
+        <text class="axlabel" x="142" y="95" text-anchor="end">Australia</text>
+        <rect class="b-rail" x="150" y="76" width="270" height="30" rx="4"/>
+        <text class="axval" x="428" y="95">28M · ~$10B exports</text>
+        <!-- Zambia $10B 46 -->
+        <text class="axlabel" x="142" y="141" text-anchor="end">Zambia @ $10B</text>
+        <rect class="b-beef" x="150" y="122" width="444" height="30" rx="4"/>
+        <text class="axval" x="602" y="141">~46M</text>
+        <!-- Argentina 53 -->
+        <text class="axlabel" x="142" y="187" text-anchor="end">Argentina</text>
+        <rect class="b-mute" x="150" y="168" width="511" height="30" rx="4"/>
+        <text class="axval" x="669" y="187" text-anchor="end" fill="var(--surface)">53M</text>
+      </svg>
+    </div>
+    <figcaption><b>Scale, not marketing, is the barrier.</b> Australia earns ~$10B from beef with ~28M head; Argentina runs ~53M. A $10B Zambian sector implies a herd it has never had — reached only by decades of raising off-take, cutting mortality, and roughly doubling carcass weight.<sup>3</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 03 WHERE THE COWS ARE ------------------------------------------>
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><h2>Where the cattle already are</h2></div>
+  <div class="col">
+    <p class="standfirst">Zambia's herd is not scattered evenly. It is concentrated in the <span class="em">Southern Province</span> — and, crucially, along the very corridor the main railway already follows.</p>
+    <p>A handful of Southern Province districts hold close to <strong>half the national herd</strong>. Monze, Itezhi-Tezhi, Namwala and Kalomo alone run well over a million head between them.<sup>7</sup> Western Province (Barotseland) carries a large traditional herd too, but it sits off the rail grid and inside Zambia's oldest foot-and-mouth zone — a market-access problem before it is a logistics one.<sup>8</sup></p>
+  </div>
+
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Cattle cluster in Southern Province</div>
+      <div class="fig-sub">Head of cattle, 2024 · leading districts (thousands)</div>
+      <svg viewBox="0 0 720 250" role="img" aria-label="Leading cattle districts 2024: Monze 285k, Itezhi-Tezhi 284k, Namwala 184k, Kalomo 176k">
+        <!-- vertical bars. baseline y=196. scale 0..300 over height 168 (y28..196). x groups -->
+        <line class="baseline" x1="60" y1="196" x2="700" y2="196"/>
+        <!-- gridline 300 -->
+        <line class="grid" x1="60" y1="28" x2="700" y2="28"/>
+        <text class="axis" x="54" y="32" text-anchor="end">300k</text>
+        <line class="grid" x1="60" y1="112" x2="700" y2="112"/>
+        <text class="axis" x="54" y="116" text-anchor="end">150k</text>
+        <!-- bars: px per k = 168/300=0.56 ; heights: 285->159.6 284->159 184->103 176->98.6 -->
+        <!-- Monze -->
+        <rect class="b-beef" x="92" y="36.4" width="96" height="159.6" rx="4"/>
+        <text class="axval" x="140" y="26" text-anchor="middle">285k</text>
+        <text class="axlabel" x="140" y="216" text-anchor="middle">Monze</text>
+        <!-- Itezhi-Tezhi -->
+        <rect class="b-beef" x="240" y="37" width="96" height="159" rx="4"/>
+        <text class="axval" x="288" y="26" text-anchor="middle">284k</text>
+        <text class="axlabel" x="288" y="216" text-anchor="middle">Itezhi-Tezhi</text>
+        <!-- Namwala -->
+        <rect class="b-beef" x="388" y="93" width="96" height="103" rx="4"/>
+        <text class="axval" x="436" y="83" text-anchor="middle">184k</text>
+        <text class="axlabel" x="436" y="216" text-anchor="middle">Namwala</text>
+        <!-- Kalomo -->
+        <rect class="b-beef" x="536" y="97.4" width="96" height="98.6" rx="4"/>
+        <text class="axval" x="584" y="88" text-anchor="middle">176k</text>
+        <text class="axlabel" x="584" y="216" text-anchor="middle">Kalomo</text>
+        <text class="axis" x="380" y="242" text-anchor="middle">All four sit in Southern Province · leading districts ≈ 49% of the national herd</text>
+      </svg>
+    </div>
+    <figcaption><b>The geography is a gift.</b> Monze, Mazabuka and Choma lie <em>directly on</em> the Zambia Railways spine; Namwala, Itezhi-Tezhi and Kalomo are a short feeder away. The cattle heartland and the trunk railway are already the same map.<sup>7,9</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 04 RAILS FOR BEEF ---------------------------------------------->
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><h2>Rails built for copper — bent toward beef</h2></div>
+  <div class="col">
+    <p class="standfirst">Zambia's railways were engineered to move minerals out and fuel in. The good news: the <span class="em">alignment</span> already serves cattle country. The gap is not track — it is <span class="em">temperature</span>.</p>
+    <p>The Zambia Railways spine runs ~846&nbsp;km on 1,067&nbsp;mm gauge from Livingstone through Choma, Monze, Mazabuka, Lusaka and Kabwe up to the Copperbelt.<sup>9</sup> It threads the cattle belt end to end. From Kapiri Mposhi, two ocean gates open:</p>
+  </div>
+
+  <figure>
+    <div class="panel flush">
+      <svg viewBox="0 0 720 430" role="img" aria-label="Schematic of Zambia's rail corridors linking the cattle belt to the Indian Ocean via TAZARA and the Atlantic via the Lobito Corridor">
+        <defs>
+          <marker id="arw" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="var(--ink-3)"/></marker>
+        </defs>
+        <!-- cattle belt shading (south) -->
+        <ellipse cx="300" cy="330" rx="215" ry="72" fill="var(--beef)" opacity=".09"/>
+        <text class="axis" x="300" y="410" text-anchor="middle" fill="var(--beef)">CATTLE BELT · Southern &amp; Western Provinces</text>
+
+        <!-- SPINE: Livingstone(150,360) -> Choma -> Monze -> Lusaka(330,255) -> Kabwe -> Kapiri Mposhi(430,150) -> Copperbelt(470,70) -->
+        <polyline points="150,360 235,320 300,300 330,255 375,205 430,150 470,70" fill="none" stroke="var(--pasture)" stroke-width="4"/>
+        <!-- TAZARA east: Kapiri(430,150) -> Dar es Salaam(690,60) -->
+        <path d="M430,150 C 540,130 620,110 682,66" fill="none" stroke="var(--rail)" stroke-width="4.5" marker-end="url(#arw)"/>
+        <!-- Lobito west: near Copperbelt/Ndola(470,70) -> Atlantic(40,120) -->
+        <path d="M470,70 C 320,40 130,60 46,116" fill="none" stroke="var(--beef)" stroke-width="4.5" marker-end="url(#arw)"/>
+        <!-- planned Zambia-Lobito greenfield spur (dashed) from spine west -->
+        <path d="M375,205 C 250,170 120,150 60,130" fill="none" stroke="var(--beef)" stroke-width="2.5" stroke-dasharray="3 6" opacity=".8"/>
+
+        <!-- station / hub nodes on spine -->
+        <g font-size="12" font-weight="600">
+          <circle cx="150" cy="360" r="6" class="b-mute"/><text class="axlabel" x="150" y="382" text-anchor="middle">Livingstone</text>
+          <circle cx="235" cy="320" r="7" fill="var(--beef)"/><text class="axlabel" x="235" y="342" text-anchor="middle">Kalomo</text>
+          <circle cx="300" cy="300" r="7" fill="var(--beef)"/><text class="axlabel" x="300" y="322" text-anchor="middle">Choma · Monze</text>
+          <circle cx="330" cy="255" r="6" class="b-mute"/><text class="axlabel" x="330" y="247" text-anchor="middle">Lusaka</text>
+          <circle cx="430" cy="150" r="8" fill="var(--ochre)"/><text class="axlabel" x="430" y="140" text-anchor="middle">Kapiri Mposhi ⟂</text>
+          <circle cx="470" cy="70" r="6" class="b-mute"/><text class="axlabel" x="486" y="66" text-anchor="start">Ndola · Kitwe</text>
+        </g>
+        <!-- ports -->
+        <g font-size="12" font-weight="700">
+          <rect x="676" y="52" width="14" height="14" rx="3" class="b-rail"/><text class="axval" x="672" y="46" text-anchor="end" fill="var(--rail)">Dar es Salaam</text>
+          <text class="axis" x="672" y="80" text-anchor="end">Indian Ocean →</text>
+          <rect x="34" y="110" width="14" height="14" rx="3" class="b-beef"/><text class="axval" x="54" y="104" text-anchor="start" fill="var(--beef)">Lobito</text>
+          <text class="axis" x="54" y="150" text-anchor="start">← Atlantic</text>
+        </g>
+        <!-- Namwala feeder -->
+        <circle cx="255" cy="345" r="5" fill="var(--beef)" opacity=".75"/>
+        <line x1="255" y1="345" x2="300" y2="300" stroke="var(--beef)" stroke-width="1.5" stroke-dasharray="2 4"/>
+        <text class="axis" x="255" y="365" text-anchor="middle" fill="var(--beef)">Namwala (spur)</text>
+      </svg>
+      <div class="map-legend">
+        <span><i class="sw" style="background:var(--pasture)"></i> Zambia Railways spine (existing)</span>
+        <span><i class="sw" style="background:var(--rail)"></i> TAZARA → Dar es Salaam</span>
+        <span><i class="sw" style="background:var(--beef)"></i> Lobito Corridor → Atlantic</span>
+        <span><i class="sw" style="background:var(--beef);opacity:.6"></i> Planned / feeder spur</span>
+      </div>
+    </div>
+    <figcaption><b>Schematic — not to scale.</b> The spine already links the cattle districts to Kapiri Mposhi, where <b>TAZARA</b> runs east to the Indian Ocean and the <b>Lobito Corridor</b> runs west to the Atlantic. Beef rides the same trains being rebuilt for copper.<sup>9,10,11,12</sup></figcaption>
+  </figure>
+
+  <div class="grid2" style="margin-top:34px;">
+    <div>
+      <h3 style="color:var(--rail)">TAZARA — the eastern gate</h3>
+      <p>Kapiri Mposhi to Dar es Salaam, ~1,860&nbsp;km. A <strong>US$1.4B revitalisation</strong> (CCECC, 30-year concession) signed Sept 2025 aims to lift freight capacity from <strong>0.2 to 2.4&nbsp;million tonnes/year</strong> within three years and cut transit times by two-thirds, with 34 new locomotives and 760 wagons.<sup>10,11</sup> Dar opens the Gulf and Asia — including large <em>halal</em> markets.</p>
+    </div>
+    <div>
+      <h3 style="color:var(--beef)">Lobito — the western gate</h3>
+      <p>The Benguela railway from the Angolan Atlantic port of Lobito through the DRC toward Zambia. In its first full year (2025) it moved ~200,000 tonnes, targeting ~1&nbsp;million tonnes/year by 2030, with a planned greenfield spur into Zambia.<sup>12</sup> Lobito shortens the route to <em>Europe and the Americas</em> — the premium markets.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="h">The real conversion job</span>
+    Making mineral rails "beef rails" is not new trunk line. It is <strong>reefer capability</strong> — refrigerated containers on flat wagons, with power at the yards — plus livestock-loading points and rail-served cold hubs. The two greenfield needs are a Namwala/feedlot spur and rail into Western Province once its disease status allows.
+  </div>
+</section>
+
+<!-- 05 COLD CHAIN -------------------------------------------------->
+<section>
+  <div class="sec-head"><span class="sec-num">05</span><h2>The cold chain that has to be built</h2></div>
+  <div class="col">
+    <p class="standfirst">Beef is a <span class="em">perishable</span>. From the killing floor to the ship, the temperature can never break — a lapse doesn't delay the product, it condemns it. That single constraint defines the logistics network.</p>
+    <p>A $10B chain is three tiers: live animals moved from grazing districts to zonal export abattoirs; blast-freezing and chilled storage at rail-served hubs; and reefer containers carried by rail and sea to port cold stores at Dar es Salaam and Lobito — with air freight from Lusaka (KKIA) for the highest-value chilled cuts.</p>
+  </div>
+
+  <figure>
+    <div class="cardgrid">
+      <div class="card"><span class="role">Anchor abattoir</span><div class="place">Kalomo</div><p>Already slaughtering for the first DRC export. First-mover export processing node on the spine.</p><span class="prov">Southern</span></div>
+      <div class="card"><span class="role">Primary export hub</span><div class="place">Choma · Monze</div><p>Heart of the herd, on the line. Site for EU/halal-approved abattoirs + blast freeze.</p><span class="prov">Southern</span></div>
+      <div class="card"><span class="role">Feedlot cluster</span><div class="place">Namwala</div><p>Finishing lots feeding a short spur/road link to the Choma hub.</p><span class="prov">Southern</span></div>
+      <div class="card"><span class="role">Consolidation + air</span><div class="place">Lusaka / Kafue</div><p>Chilled consolidation; KKIA air freight for premium cuts to distant markets.</p><span class="prov">Lusaka</span></div>
+      <div class="card"><span class="role">Rail pivot</span><div class="place">Kapiri Mposhi</div><p>Reefer transload onto TAZARA for Dar es Salaam. The east-west switch.</p><span class="prov">Central</span></div>
+      <div class="card"><span class="role">Copperbelt + Lobito</span><div class="place">Ndola · Kitwe</div><p>Serves the DRC market and the Lobito interchange to the Atlantic.</p><span class="prov">Copperbelt</span></div>
+      <div class="card"><span class="role">Quarantine + vaccination</span><div class="place">Mongu · Kaoma</div><p>Western Province gateway — disease management before animals reach the clean chain.</p><span class="prov">Western</span></div>
+      <div class="card"><span class="role">Port cold stores</span><div class="place">Dar · Lobito</div><p>Reefer stacking and vessel loading at both ocean gates.</p><span class="prov">TZ · AO</span></div>
+    </div>
+    <figcaption><b>Rail-served hubs trace the spine.</b> Six of eight primary nodes sit on existing track; Western Province and the ports are the build-out. Fleet at $10B scale is order-of-magnitude: on the order of <b>~1,500 reefer road trucks</b> and <b>several thousand reefer containers</b> cycling farm → hub → port, plus a large live-haul fleet.</figcaption>
+  </figure>
+</section>
+
+<!-- 06 ENERGY ------------------------------------------------------>
+<section>
+  <div class="sec-head"><span class="sec-num">06</span><h2>The binding constraint: power</h2></div>
+  <div class="col">
+    <p class="standfirst">Here is where the plan meets Zambia's hardest reality. A cold chain needs <span class="em">continuous, reliable</span> electricity — and Zambia's grid, 82% hydro, has been in crisis.</p>
+    <p>The 2024 drought dropped Lake Kariba's live storage to ~7.7% of usable capacity; ZESCO load-shedding reached up to <strong>21 hours a day</strong>, with generation near 900&nbsp;MW against ~2,400&nbsp;MW of demand.<sup>13,14</sup> For minerals, an outage is lost output. For beef, an outage can be <em>lost product</em>.</p>
+    <p>So the beef chain cannot be a grid dependent. Each hub needs firm, mostly on-site power: <strong>solar PV + battery storage + grid + captive backup</strong>. Zambia's ~5–6&nbsp;kWh/m²/day of sunshine makes this natural — and initiatives like the Chisamba solar plant and a 1,000&nbsp;MW solar PPA point the way.<sup>14</sup></p>
+  </div>
+
+  <figure>
+    <div class="panel">
+      <div class="fig-title">The chain must not ride on Kariba</div>
+      <div class="fig-sub">Illustrative dedicated firm capacity for a $10B beef chain vs. grid context (MW)</div>
+      <svg viewBox="0 0 720 210" role="img" aria-label="Illustrative power: dedicated beef-chain firm capacity ~200MW against a national deficit of ~750MW">
+        <line class="baseline" x1="230" y1="30" x2="230" y2="180"/>
+        <!-- rows -->
+        <text class="axlabel" x="222" y="52" text-anchor="end">National deficit '24</text>
+        <rect class="b-mute" x="230" y="38" width="360" height="26" rx="4"/>
+        <text class="axval" x="598" y="56">~750 MW</text>
+
+        <text class="axlabel" x="222" y="98" text-anchor="end">Kariba drought loss</text>
+        <rect class="b-mute" x="230" y="84" width="288" height="26" rx="4"/>
+        <text class="axval" x="526" y="102">~600 MW</text>
+
+        <text class="axlabel" x="222" y="144" text-anchor="end">Beef chain (dedicated)</text>
+        <rect class="b-beef" x="230" y="130" width="96" height="26" rx="4"/>
+        <text class="axval" x="334" y="148">~150–250 MW · solar + storage</text>
+        <text class="axis" x="230" y="196">0</text>
+        <text class="axis" x="410" y="196" text-anchor="middle">400 MW</text>
+        <text class="axis" x="590" y="196" text-anchor="middle">800 MW</text>
+      </svg>
+    </div>
+    <figcaption><b>The load is small — the reliability is not.</b> A full $10B cold chain needs only a couple hundred MW, tiny beside national demand. But it must be <em>firm</em>: best delivered behind-the-meter as solar-plus-storage at each hub, so the meat is never hostage to the next drought.<sup>13,14</sup></figcaption>
+  </figure>
+</section>
+
+<!-- 07 FINANCE ----------------------------------------------------->
+<section>
+  <div class="sec-head"><span class="sec-num">07</span><h2>What it costs, and who pays</h2></div>
+  <div class="col">
+    <p class="standfirst">Reaching $10B is a capital program on the order of <span class="em">US$15–25&nbsp;billion over 25–30 years</span> — and most of it is biological, not concrete.</p>
+    <p>The single largest line is the herd itself: restocking, genetics and artificial insemination, pasture, water, dip tanks and the extension services that cut mortality and lift off-take. That capital compounds slowly, over cattle generations. The market-access gate — a national livestock ID &amp; traceability system and foot-and-mouth zoning, on the Botswana/Namibia model that unlocked the EU<sup>15,16</sup> — is comparatively cheap but absolutely necessary: no traceability, no premium markets.</p>
+  </div>
+
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Illustrative capital stack to $10B</div>
+      <div class="fig-sub">Cumulative over ~25–30 yrs · US$ billion · order-of-magnitude · total ≈ $20B</div>
+      <svg viewBox="0 0 720 192" role="img" aria-label="Capital stack: herd and pasture 9B, processing and cold hubs 3B, logistics 3B, disease control and traceability 1.8B, energy 1.6B, rail spurs 1.6B, total about 20B">
+        <!-- single stacked bar, total 20B over x 40..680 (640px). px per B = 32 -->
+        <!-- segments with 2px gaps -->
+        <!-- herd 9 -> 288w -->
+        <rect class="s6" x="40" y="40" width="286" height="46" rx="3"/>
+        <!-- processing 3 -> 96 -->
+        <rect class="s5" x="328" y="40" width="94" height="46" rx="3"/>
+        <!-- logistics 3 -> 96 -->
+        <rect class="s4" x="424" y="40" width="94" height="46" rx="3"/>
+        <!-- disease 1.8 -> 57.6 -->
+        <rect class="s3" x="520" y="40" width="55.6" height="46" rx="3"/>
+        <!-- energy 1.6 -> 51.2 -->
+        <rect class="s2" x="577.6" y="40" width="49.2" height="46" rx="3"/>
+        <!-- rail spurs 1.6 -> 51.2 -->
+        <rect class="s1" x="628.8" y="40" width="51.2" height="46" rx="3"/>
+
+        <!-- direct labels -->
+        <g font-size="12">
+          <line x1="183" y1="90" x2="183" y2="100" class="grid"/>
+          <text class="axval" x="183" y="34" text-anchor="middle">$9B</text>
+          <text class="axlabel" x="183" y="116" text-anchor="middle">Herd · pasture · water</text>
+
+          <line x1="375" y1="90" x2="375" y2="100" class="grid"/>
+          <text class="axval" x="375" y="34" text-anchor="middle">$3B</text>
+          <text class="axlabel" x="375" y="116" text-anchor="middle">Processing + cold hubs</text>
+
+          <line x1="471" y1="90" x2="471" y2="100" class="grid"/>
+          <text class="axval" x="471" y="34" text-anchor="middle">$3B</text>
+          <text class="axlabel" x="471" y="134" text-anchor="middle">Logistics · reefer / rail / ports</text>
+
+          <line x1="548" y1="90" x2="548" y2="100" class="grid"/>
+          <text class="axlabel" x="548" y="152" text-anchor="middle">Disease + traceability · $1.8B</text>
+
+          <line x1="628" y1="90" x2="628" y2="100" class="grid"/>
+          <text class="axlabel" x="612" y="170" text-anchor="middle">Energy · Rail spurs</text>
+          <text class="axlabel" x="612" y="186" text-anchor="middle">$1.6B each</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>The herd dominates the bill.</b> Split is illustrative. It funds through blended finance — DFIs (IFC, AfDB, US DFC via Lobito, DBSA), China via TAZARA, sovereign guarantees, livestock/warehouse receipts, out-grower and contract-farming finance, agri- and diaspora bonds, and carbon co-finance from rangeland restoration.</figcaption>
+  </figure>
+</section>
+
+<!-- 08 ROADMAP ----------------------------------------------------->
+<section>
+  <div class="sec-head"><span class="sec-num">08</span><h2>A three-phase path</h2></div>
+  <div class="col">
+    <p class="standfirst">The route to $10B runs <span class="em">through</span> the $1B target, not around it — the same heartland, rails and disease zones scale up in sequence.</p>
+  </div>
+
+  <figure>
+    <div class="panel">
+      <div class="fig-title">Export earnings trajectory</div>
+      <div class="fig-sub">US$ billion / year · illustrative build-out</div>
+      <svg viewBox="0 0 720 250" role="img" aria-label="Export value rising from near zero in 2026 to $1B by 2031, $4.5B by 2040, and $10B by 2055">
+        <!-- axes: x 2026..2055 over 60..680 ; y 0..10 over 200..24 -->
+        <!-- gridlines y -->
+        <g>
+          <line class="grid" x1="60" y1="200" x2="680" y2="200"/><text class="axis" x="52" y="204" text-anchor="end">0</text>
+          <line class="grid" x1="60" y1="112" x2="680" y2="112"/><text class="axis" x="52" y="116" text-anchor="end">$5B</text>
+          <line class="grid" x1="60" y1="24" x2="680" y2="24"/><text class="axis" x="52" y="28" text-anchor="end">$10B</text>
+        </g>
+        <!-- data points: (year->x) x=60+(yr-2026)/29*620 ; (val->y) y=200-val/10*176 -->
+        <!-- 2026 .05 ->x60 y199 ; 2031 1 ->x167 y182 ; 2035 2.3 ->x252 y160 ; 2040 4.5 ->x360 y121 ; 2045 6.8 ->x467 y80 ; 2050 8.6 ->x574 y49 ; 2055 10 ->x680 y24 -->
+        <path d="M60,199 L167,182 L252,160 L360,121 L467,80 L574,49 L680,24 L680,200 L60,200 Z" fill="var(--beef)" opacity=".13"/>
+        <path d="M60,199 L167,182 L252,160 L360,121 L467,80 L574,49 L680,24" fill="none" stroke="var(--beef)" stroke-width="3"/>
+        <!-- phase markers -->
+        <g>
+          <circle cx="167" cy="182" r="6" fill="var(--beef)" stroke="var(--surface)" stroke-width="2"/>
+          <text class="axval" x="167" y="172" text-anchor="middle">$1B</text>
+          <circle cx="360" cy="121" r="6" fill="var(--beef)" stroke="var(--surface)" stroke-width="2"/>
+          <text class="axval" x="360" y="111" text-anchor="middle">$4.5B</text>
+          <circle cx="680" cy="24" r="7" fill="var(--beef)" stroke="var(--surface)" stroke-width="2"/>
+          <text class="axval" x="672" y="20" text-anchor="end">$10B</text>
+        </g>
+        <!-- x labels + phase bands -->
+        <g class="axis" font-size="12">
+          <text x="60" y="222" text-anchor="start">2026</text>
+          <text x="167" y="222" text-anchor="middle">2031</text>
+          <text x="360" y="222" text-anchor="middle">2040</text>
+          <text x="574" y="222" text-anchor="middle">2050</text>
+          <text x="680" y="222" text-anchor="end">2055</text>
+        </g>
+        <line x1="167" y1="24" x2="167" y2="200" class="grid" stroke-dasharray="2 5"/>
+        <line x1="360" y1="24" x2="360" y2="200" class="grid" stroke-dasharray="2 5"/>
+        <text class="axis" x="113" y="240" text-anchor="middle" fill="var(--ink-2)">PHASE 1</text>
+        <text class="axis" x="263" y="240" text-anchor="middle" fill="var(--ink-2)">PHASE 2</text>
+        <text class="axis" x="520" y="240" text-anchor="middle" fill="var(--ink-2)">PHASE 3</text>
+      </svg>
+    </div>
+  </figure>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="pt">PHASE 1</div><div class="py">→ $1B</div><div class="pn">2026 – 2031 · Prove it</div>
+      <ul>
+        <li>Consolidate the Southern Province heartland on the existing spine</li>
+        <li>Stand up a disease-free compartment/zone + pilot national traceability</li>
+        <li>2–3 EU/halal export abattoirs: Kalomo, Choma, Monze</li>
+        <li>Seed reefer fleet; TAZARA reefer service to Dar for Gulf/halal</li>
+        <li>Grow regional (DRC) volume via road + early Lobito</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="pt">PHASE 2</div><div class="py">→ $4–5B</div><div class="pn">2031 – 2040 · Scale the herd</div>
+      <ul>
+        <li>Herd to ~15–20M via genetics, finishing and mortality control</li>
+        <li>Extend disease zoning; bring Western Province in behind vaccination</li>
+        <li>Build Namwala / feedlot rail spurs; Lobito Zambia spur online</li>
+        <li>Port cold stores at Dar and Lobito at commercial scale</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="pt">PHASE 3</div><div class="py">→ $10B</div><div class="pn">2040 – 2055 · Top-ten exporter</div>
+      <ul>
+        <li>Herd ~40–46M; national traceability; off-take near 28%</li>
+        <li>Both ocean gates at full reefer capacity</li>
+        <li>Premium "Zambian grass-fed" brand into EU, Gulf, Asia, Americas</li>
+        <li>Beef becomes a second export pillar beside copper</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section>
+  <div class="sec-head"><span class="sec-num">✦</span><h2>Sources &amp; notes</h2></div>
+  <ol class="srcs">
+    <li>Ministry of Fisheries &amp; Livestock — <a href="https://www.mfl.gov.zm/?p=2159">20 countries eye Zambia beef exports</a>; <a href="https://www.mfl.gov.zm/?p=1561">stakeholder engagement to boost beef exports</a>.</li>
+    <li>APA News — <a href="https://apanews.net/zambia-to-export-first-ever-beef-consignment-to-drc/">Zambia to export first-ever beef consignment to DRC</a> (Namwala / Kalomo, Oct 2025).</li>
+    <li>Zambia Dept. of Livestock Development 2024 data as cited in <a href="https://www.tandfonline.com/doi/full/10.1080/23311932.2024.2349339">Cogent Food &amp; Agriculture (2024)</a>; national/comparative herd figures from FAOSTAT / USDA.</li>
+    <li>Springer, <a href="https://link.springer.com/article/10.1007/s11250-017-1399-0">Practices of traditional beef farmers in Zambia</a> — mortality, off-take, calving rates.</li>
+    <li>WorldsTopExports / Statista — <a href="https://www.worldstopexports.com/average-frozen-beef-prices-compared-by-top-exporters/">average frozen beef export prices</a> (~US$4,737/t global, 2024).</li>
+    <li>S&amp;P Global — <a href="https://www.spglobal.com/commodity-insights/en/news-research/latest-news/agriculture/022025-australian-90cl-beef-prices-hit-record-high-amid-soaring-us-demand">Australian 90CL beef record ~US$6,412/t</a> (Feb 2025).</li>
+    <li>ResearchGate / ZamStats — <a href="https://www.researchgate.net/figure/Top-10-districts-in-Zambia-with-the-highest-population-of-cattle_fig3_380492425">top cattle districts</a> (Monze, Itezhi-Tezhi, Namwala, Kalomo).</li>
+    <li>Wiley Vet. Medicine International — <a href="https://onlinelibrary.wiley.com/doi/10.1155/2014/373921">FMD control in Zambia</a> (Western Province endemicity, zoning).</li>
+    <li>Logistics Cluster / Wikipedia — <a href="https://lca.logcluster.org/24-zambia-railway-assessment">Zambia Railway Assessment</a>; <a href="https://en.wikipedia.org/wiki/Zambia_Railways">Zambia Railways</a> (846 km spine, 1,067 mm gauge).</li>
+    <li>Railway Gazette — <a href="https://www.railwaygazette.com/infrastructure/china-backed-tazara-revitalisation-officially-launched/70087.article">TAZARA revitalisation</a> (capacity 0.2→2.4 Mt/yr; rolling stock).</li>
+    <li>Anadolu Agency — <a href="https://www.aa.com.tr/en/africa/china-zambia-tanzania-sign-14b-agreement-to-modernize-5-decade-old-railway-line/3749778">US$1.4B TAZARA agreement</a> (30-yr concession, Sept 2025).</li>
+    <li>Mining Weekly / lobitocorridor.org — <a href="https://www.miningweekly.com/article/corridor-makes-significant-progress-2026-07-10">Lobito Corridor progress</a> (~200 kt in 2025; ~1 Mt/yr by 2030).</li>
+    <li>African Arguments — <a href="https://africanarguments.org/2024/09/zambia-faces-21-hour-power-cuts-as-lake-kariba-dries-up/">Zambia faces 21-hour power cuts as Kariba dries up</a>.</li>
+    <li>ESI-Africa / Pulitzer Center — <a href="https://www.esi-africa.com/renewable-energy/solar/zambia-solar-energy-to-help-offset-12-hours-of-daily-loadshedding/">solar to offset load-shedding</a>; energy mix &amp; deficit.</li>
+    <li>TIPS — <a href="https://www.tips.org.za/files/sadrn_policy_brief_4_-_effects_of_eu_traceback_system_botswana_0.pdf">EU traceback system &amp; Botswana</a>; Botswana Meat Commission / EU quota model.</li>
+    <li>The Brief (Namibia) — <a href="https://thebrief.com.na/2025/02/namibian-beef-exports-surge-to-over-22-million-kg-in-2024/">Namibian beef exports 2024</a>; Meatco EU-led revenue.</li>
+  </ol>
+  <p class="disclaimer">This is an independent research and scenario brief, not a government plan or investment advice. The $10B figure is used as an analytical anchor to reveal system constraints; the scenario model, fleet estimates, energy figures and capital stack are explicitly illustrative order-of-magnitude values built on the cited data and standard livestock/logistics assumptions. Prepared September 2026.</p>
+</section>
+
+<div class="foot wrap">MUTAMBO RESEARCH · ZAMBIA BEEF EXPORT INFRASTRUCTURE · $1B → $10B</div>
+
+</main>
+
+<script>
+(function(){
+  var usd=document.getElementById('s-usd'), price=document.getElementById('s-price'),
+      kg=document.getElementById('s-kg'), off=document.getElementById('s-off');
+  var vUsd=document.getElementById('v-usd'), vPrice=document.getElementById('v-price'),
+      vKg=document.getElementById('v-kg'), vOff=document.getElementById('v-off');
+  var oT=document.getElementById('o-t'), oHx=document.getElementById('o-hx'),
+      oHerd=document.getElementById('o-herd'), oMult=document.getElementById('o-mult');
+  var BASE=5.1; // million head 2024
+  function fmt(n){ return n.toLocaleString('en-US',{maximumFractionDigits:1,minimumFractionDigits:1}); }
+  function calc(){
+    var U=parseFloat(usd.value), P=parseFloat(price.value), K=parseFloat(kg.value), O=parseFloat(off.value);
+    vUsd.textContent='$'+fmt(U)+'B';
+    vPrice.textContent='$'+P.toLocaleString('en-US')+' / t';
+    vKg.textContent=K+' kg';
+    vOff.textContent=O+'%';
+    var tonnes = (U*1e9)/P;                 // tonnes of export beef
+    var headExport = (tonnes*1000)/K;       // animals
+    var totalHead = headExport*1.4;         // + domestic/regional
+    var herd = totalHead/(O/100);           // steady-state herd
+    oT.innerHTML = fmt(tonnes/1e6)+'<small> Mt/yr</small>';
+    oHx.innerHTML = fmt(headExport/1e6)+'<small> M/yr</small>';
+    oHerd.innerHTML = Math.round(herd/1e6)+'<small> M head</small>';
+    oMult.innerHTML = fmt((herd/1e6)/BASE)+'<small>×</small>';
+  }
+  [usd,price,kg,off].forEach(function(el){ el.addEventListener('input',calc); });
+  calc();
+})();
+</script>
