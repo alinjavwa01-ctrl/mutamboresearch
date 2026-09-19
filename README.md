@@ -14,6 +14,7 @@ it on Vercel as a zero-config static project.
 | [`index.html`](index.html) | Landing page — the Mutambo Research hub. |
 | [`report.html`](report.html) | The $10B research report (charts, corridor schematic, interactive scenario model). |
 | [`rail.html`](rail.html) | **Interactive rail & facilities map** — every corridor node sized by current cattle stock, with the abattoir / feedlot / cold / reefer / quarantine / power each needs, scaled to the $1B and $10B targets. |
+| [`tobacco.html`](tobacco.html) | **Tobacco sector memo** (Bloomberg-terminal style) — Zambia's cigarette business (BAT Zambia, the Lusaka MFEZ tax holiday, the FCTC policy-incoherence controversy, leaf-growing data) and a correction on the tobacco family history: the **Rupert** family (Rembrandt → Rothmans → BAT / Richemont), not the Oppenheimers. |
 | [`REPORT.md`](REPORT.md) | The written research brief (numbers, tables, sources). |
 | [`site/index.html`](site/index.html) | Artifact-renderer source for the report (body-only; used by the Claude Artifact publish). |
 

@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zambia Tobacco Memo</title>
+<meta name="description" content="Mutambo Research memo — Zambia's cigarette business, and the Rupert (not Oppenheimer) tobacco empire behind the Rothmans brand. Bloomberg-terminal data brief.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* ---- Bloomberg-terminal palette (fixed dark; that's the medium) ---- */
+:root{
+  --term:#0A0A0B; --panel:#101216; --panel-2:#15181D; --inset:#0D0F13;
+  --line:#23272E; --line-2:#2E333C;
+  --amber:#FF9900;         /* terminal amber — headers / ticker */
+  --amber-dim:#B36B00;
+  --key:#FFB84D;
+  --txt:#D7DCE3; --txt-2:#8C94A0; --txt-3:#5B626D;
+  --up:#00C176; --down:#FF3B47; --cash:#37B6FF; --white:#F4F6F9;
+  --leaf:#6FBF3B;          /* tobacco leaf green accent */
+  --tag-bg:#1A1408;
+}
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body{margin:0;background:var(--term);color:var(--txt);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:14px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;}
+.sans{font-family:"Inter",system-ui,sans-serif;}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:18px;}
+a{color:var(--cash);text-decoration:none;}
+a:hover{text-decoration:underline;}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:.01em;}
+.amber{color:var(--amber);}
+.up{color:var(--up);} .down{color:var(--down);} .cash{color:var(--cash);} .leaf{color:var(--leaf);}
+.dim{color:var(--txt-2);} .white{color:var(--white);}
+sup{color:var(--amber);font-size:.62em;font-weight:600;padding-left:1px;}
+
+/* ---- ticker bar ---- */
+.ticker{background:#000;border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;
+  font-size:12.5px;letter-spacing:.02em;}
+.ticker .run{display:inline-block;padding-block:7px;animation:scroll 42s linear infinite;}
+.ticker .it{padding-inline:22px;color:var(--txt-2);}
+.ticker .it b{color:var(--white);font-weight:600;}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker .run{animation:none;padding-left:18px;}}
+
+/* ---- top command bar ---- */
+.cmd{background:var(--amber);color:#000;font-weight:700;}
+.cmd .wrap{display:flex;align-items:center;gap:16px;padding-block:6px;flex-wrap:wrap;}
+.cmd .fn{background:#000;color:var(--amber);padding:1px 7px;border-radius:3px;font-size:12px;letter-spacing:.06em;}
+.cmd .sp{flex:1;}
+.cmd a{color:#000;font-size:12px;letter-spacing:.04em;}
+.cmd a:hover{color:#222;}
+
+/* ---- masthead / memo header ---- */
+.mast{border-bottom:1px solid var(--line);padding-block:30px 26px;background:
+  radial-gradient(1200px 200px at 12% -40%, rgba(255,153,0,.10), transparent 70%);}
+.crumbs{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;}
+.mast h1{font-family:"Inter",sans-serif;font-size:clamp(28px,4.6vw,46px);line-height:1.04;
+  letter-spacing:-.02em;margin:14px 0 0;color:var(--white);max-width:22ch;}
+.mast h1 em{color:var(--amber);font-style:normal;}
+.mast .sub{color:var(--txt-2);font-size:15px;margin-top:14px;max-width:70ch;}
+.memohead{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:24px;}
+.memohead div{background:var(--panel);padding:11px 14px;}
+.memohead .k{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-3);}
+.memohead .v{color:var(--txt);font-size:12.5px;margin-top:3px;}
+
+/* ---- section scaffold ---- */
+section{padding-block:34px;border-bottom:1px solid var(--line);}
+.sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;}
+.sec-h .no{color:var(--amber);font-weight:700;font-size:13px;}
+.sec-h h2{font-family:"Inter",sans-serif;font-size:clamp(19px,2.6vw,26px);color:var(--white);letter-spacing:-.01em;}
+.lede{font-size:15px;color:var(--txt);max-width:78ch;}
+.lede.big{font-size:16.5px;}
+p{margin:0 0 14px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start;}
+.prose{max-width:80ch;}
+.prose p{color:var(--txt);}
+
+/* ---- KPI tiles ---- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:6px 0 4px;}
+.tile{background:var(--panel);padding:15px 15px 13px;}
+.tile .n{font-family:"Inter",sans-serif;font-weight:700;font-size:27px;line-height:1;color:var(--white);
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;}
+.tile .n .u{font-size:13px;color:var(--txt-2);font-weight:600;margin-left:2px;}
+.tile .l{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--txt-2);margin-top:8px;line-height:1.35;}
+.tile.amber .n{color:var(--amber);} .tile.up .n{color:var(--up);} .tile.leaf .n{color:var(--leaf);}
+
+/* ---- data panel + tables ---- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:18px 0;}
+.panel-h{background:var(--panel-2);border-bottom:1px solid var(--line);padding:9px 14px;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+.panel-h .t{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-weight:600;}
+.panel-h .r{font-size:10.5px;letter-spacing:.06em;color:var(--txt-3);text-transform:uppercase;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums;}
+th,td{padding:8px 14px;text-align:left;border-bottom:1px solid var(--line);}
+th{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--txt-3);font-weight:600;}
+td{color:var(--txt);}
+td.num,th.num{text-align:right;}
+tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:var(--inset);}
+.co{color:var(--white);font-weight:600;}
+.pill{display:inline-block;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--line-2);border-radius:4px;padding:1px 6px;color:var(--txt-2);}
+.pill.leaf{color:var(--leaf);border-color:#2c3a1e;background:#131a0d;}
+.pill.amber{color:var(--amber);border-color:#3a2a08;background:var(--tag-bg);}
+
+/* ---- callout ---- */
+.call{border-left:3px solid var(--amber);background:linear-gradient(90deg,rgba(255,153,0,.06),transparent);
+  border-radius:0 8px 8px 0;padding:15px 18px;margin:20px 0;}
+.call .h{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:6px;}
+.call p{margin:0;color:var(--txt);font-size:14px;}
+.call.flag{border-left-color:var(--down);background:linear-gradient(90deg,rgba(255,59,71,.07),transparent);}
+.call.flag .h{color:var(--down);}
+
+/* ---- flow / lineage ---- */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:6px 0;}
+.node{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;flex:1;min-width:150px;}
+.node .yr{font-size:10.5px;letter-spacing:.06em;color:var(--amber);}
+.node .nm{font-family:"Inter",sans-serif;font-weight:600;color:var(--white);font-size:14px;margin:4px 0 3px;}
+.node .ds{font-size:11.5px;color:var(--txt-2);line-height:1.4;}
+.arrow{align-self:center;color:var(--amber);font-weight:700;padding-inline:8px;font-size:16px;}
+@media (max-width:720px){.arrow{transform:rotate(90deg);padding-block:4px;}}
+
+/* ---- bars ---- */
+.bar-row{display:grid;grid-template-columns:150px 1fr 74px;align-items:center;gap:12px;padding:6px 0;}
+.bar-row .lab{font-size:12px;color:var(--txt);}
+.bar-track{background:var(--inset);border-radius:3px;height:16px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:3px;}
+.bar-row .val{font-size:12px;text-align:right;color:var(--white);font-variant-numeric:tabular-nums;}
+
+/* ---- sources ---- */
+.srcs{columns:2;column-gap:34px;font-size:11.5px;line-height:1.5;color:var(--txt-2);margin:0;padding-left:18px;}
+.srcs li{break-inside:avoid;margin-bottom:9px;}
+.disc{font-size:11.5px;color:var(--txt-3);line-height:1.55;max-width:82ch;margin-top:20px;font-style:italic;}
+.foot{padding-block:22px 46px;color:var(--txt-3);font-size:11px;letter-spacing:.06em;}
+
+@media (max-width:760px){
+  body{font-size:13.5px;}
+  .grid2{grid-template-columns:1fr;gap:20px;}
+  .memohead{grid-template-columns:1fr 1fr;}
+  .srcs{columns:1;}
+  .bar-row{grid-template-columns:110px 1fr 64px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="run">
+    <span class="it"><b>BATZ:LuSE</b> Zambia mfg hub <b class="cash">USD 25M+</b></span>
+    <span class="it">MFEZ tax holiday <b class="up">0%</b> yrs 1–5</span>
+    <span class="it">Zambia leaf '23 <b>36,136 t</b></span>
+    <span class="it">Farm area <b>20,446 ha</b></span>
+    <span class="it">Mkt CAGR '26–'32 <b class="up">+6.5%</b></span>
+    <span class="it">Rothmans → BAT '99 <b class="cash">~USD 7.5B</b></span>
+    <span class="it">Family <b class="amber">RUPERT</b> ≠ Oppenheimer</span>
+    <span class="it">Brands <b>Dunhill · Rothmans · Pall Mall</b></span>
+    <!-- duplicate for seamless loop -->
+    <span class="it"><b>BATZ:LuSE</b> Zambia mfg hub <b class="cash">USD 25M+</b></span>
+    <span class="it">MFEZ tax holiday <b class="up">0%</b> yrs 1–5</span>
+    <span class="it">Zambia leaf '23 <b>36,136 t</b></span>
+    <span class="it">Farm area <b>20,446 ha</b></span>
+    <span class="it">Mkt CAGR '26–'32 <b class="up">+6.5%</b></span>
+    <span class="it">Rothmans → BAT '99 <b class="cash">~USD 7.5B</b></span>
+    <span class="it">Family <b class="amber">RUPERT</b> ≠ Oppenheimer</span>
+    <span class="it">Brands <b>Dunhill · Rothmans · Pall Mall</b></span>
+  </div>
+</div>
+
+<!-- command bar -->
+<div class="cmd">
+  <div class="wrap">
+    <span class="fn">MEMO</span>
+    <span>ZM TOBACCO &lt;GO&gt;</span>
+    <span class="sp"></span>
+    <a href="./index.html">HOME</a>
+    <a href="./report.html">$10B REPORT</a>
+    <a href="./rail.html">RAIL MAP</a>
+  </div>
+</div>
+
+<!-- masthead -->
+<div class="mast">
+  <div class="wrap">
+    <div class="crumbs">Mutambo Research · Sector Memo · Tobacco</div>
+    <h1>Zambia's cigarette business — and the <em>Rupert</em>, not Oppenheimer, tobacco empire</h1>
+    <p class="sub">A data brief on who makes and grows cigarettes in Zambia, the tax-incentive controversy behind the manufacturing boom, and a correction on the family history that is almost always misattributed.</p>
+    <div class="memohead">
+      <div><div class="k">To</div><div class="v">File / njavwa@amano.so</div></div>
+      <div><div class="k">From</div><div class="v">Mutambo Research</div></div>
+      <div><div class="k">Re</div><div class="v">ZM tobacco + Rupert vs Oppenheimer</div></div>
+      <div><div class="k">Date</div><div class="v">2026-09-19</div></div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- 00 THE CORRECTION -->
+<section>
+  <div class="sec-h"><span class="no">00</span><h2>Correction first: it's the Ruperts</h2></div>
+  <div class="call flag">
+    <div class="h">■ Attribution flag — high confidence</div>
+    <p>There is <b class="white">no Oppenheimer cigarette business</b>. The Oppenheimer family fortune is <b class="white">diamonds and gold</b> — Anglo American and De Beers. The Southern-African family that built a global <b class="white">cigarette</b> empire is the <b class="amber">Rupert</b> family (Rembrandt → Rothmans → BAT / Richemont). The two are routinely confused; this memo treats the Rupert lineage as the substantive answer.</p>
+  </div>
+  <div class="grid2 prose">
+    <div>
+      <h3 class="sans white" style="font-size:15px;margin-bottom:8px">OPPENHEIMER — diamonds &amp; gold</h3>
+      <p class="dim">Ernest Oppenheimer founded <b class="white">Anglo American</b> (1917) and the family controlled <b class="white">De Beers</b> for three generations, exiting its De Beers stake to Anglo American in 2012 for ~USD 5.1B. Mining, minerals, finance — <b class="down">not tobacco</b>.</p>
+    </div>
+    <div>
+      <h3 class="sans white" style="font-size:15px;margin-bottom:8px">RUPERT — tobacco &amp; luxury</h3>
+      <p class="dim">Anton Rupert founded the <b class="white">Rembrandt Group</b> (1948) on tobacco in Stellenbosch. It grew into <b class="white">Rothmans International</b>, merged into <b class="white">British American Tobacco</b> in 1999, while the family's luxury arm became <b class="white">Richemont</b> (Cartier, Montblanc). Holding vehicles today: <b>Remgro</b>, <b>Reinet</b>, <b>Richemont</b>.</p>
+    </div>
+  </div>
+  <div class="call">
+    <div class="h">◆ The thread that connects both questions</div>
+    <p>The irony that makes this one memo, not two: <b class="white">Rothmans</b> — a brand born of the Rupert tobacco empire — is one of the flagship brands rolling off <b class="white">BAT Zambia</b>'s Lusaka line today. The family history and the Zambian factory floor meet on the same pack.</p>
+  </div>
+</section>
+
+<!-- 01 THE RUPERT LINEAGE -->
+<section>
+  <div class="sec-h"><span class="no">01</span><h2>The Rupert tobacco empire — corporate lineage</h2></div>
+  <p class="lede dim">From a small Stellenbosch tobacco venture to a controlling interest in the world's second-largest tobacco company, then a pivot to luxury goods.</p>
+  <div class="flow">
+    <div class="node"><div class="yr">1948</div><div class="nm">Rembrandt Group</div><div class="ds">Anton Rupert; South African tobacco &amp; industrial holding.</div></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="yr">1970s–90s</div><div class="nm">Rothmans International</div><div class="ds">Global cigarette business (Rothmans, Dunhill, Peter Stuyvesant).</div></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="yr">1999</div><div class="nm">BAT merger</div><div class="ds">Rothmans folded into British American Tobacco; deal ~USD 7.5B. Family becomes a major BAT shareholder.</div></div>
+    <div class="arrow">→</div>
+    <div class="node"><div class="yr">1988 / 2008</div><div class="nm">Richemont · Reinet</div><div class="ds">Luxury (Cartier, Montblanc) split into Richemont; tobacco/other stakes into Reinet.</div></div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><span class="t">Rupert-family holdings — orientation</span><span class="r">Not exhaustive · public listings</span></div>
+    <table>
+      <thead><tr><th>Vehicle</th><th>What it is</th><th>Origin sector</th></tr></thead>
+      <tbody>
+        <tr><td class="co">Richemont</td><td>Luxury goods group (Cartier, Van Cleef &amp; Arpels, Montblanc)</td><td><span class="pill">Luxury</span></td></tr>
+        <tr><td class="co">Remgro</td><td>SA investment holding co. (successor to Rembrandt)</td><td><span class="pill">Diversified</span></td></tr>
+        <tr><td class="co">Reinet Investments</td><td>Investment vehicle; held a large legacy BAT stake, sold down over time</td><td><span class="pill amber">Tobacco legacy</span></td></tr>
+        <tr><td class="co">British American Tobacco</td><td>Global tobacco #2 — absorbed Rothmans in 1999</td><td><span class="pill amber">Tobacco</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="dim" style="font-size:12px">Note: exact current shareholdings shift with disposals and are not the point here — the point is the <b class="white">Rupert → Rothmans → BAT</b> chain of custody over the cigarette business.<sup>1,2,3</sup></p>
+</section>
+
+<!-- 02 ZAMBIA MANUFACTURING -->
+<section>
+  <div class="sec-h"><span class="no">02</span><h2>Zambia's cigarette business — manufacturing</h2></div>
+  <p class="lede big">Zambia has two sides to a tobacco economy: <span class="leaf">growing the leaf</span> and <span class="amber">making the sticks</span>. On manufacturing, one name dominates.</p>
+  <div class="tiles">
+    <div class="tile amber"><div class="n">USD 25M<span class="u">+</span></div><div class="l">BAT Zambia mfg hub · Lusaka South MFEZ</div></div>
+    <div class="tile"><div class="n">20M<span class="u">+/day</span></div><div class="l">Reported cigarette capacity, MFEZ plants (2018)</div></div>
+    <div class="tile up"><div class="n">0<span class="u">%</span></div><div class="l">Corporate tax · first 5 years in the zone</div></div>
+    <div class="tile"><div class="n">2<span class="u"> firms</span></div><div class="l">BAT Zambia + Roland Imperial Tobacco</div></div>
+  </div>
+  <div class="grid2 prose" style="margin-top:20px">
+    <div>
+      <p><b class="white">British American Tobacco Zambia</b> (LuSE: <span class="cash">BATZ</span>) is the dominant manufacturer, operating a state-of-the-art <b class="white">USD 25M+ hub</b> in the <b class="white">Lusaka South Multi-Facility Economic Zone (MFEZ)</b>, producing <b class="white">Dunhill, Rothmans and Pall Mall</b> for domestic and export markets.</p>
+      <p><b class="white">Roland Imperial Tobacco</b> also opened a facility in the zone. On opening (2018), the MFEZ plants were reported capable of <b class="white">20M+ cigarettes a day</b>.</p>
+    </div>
+    <div>
+      <p>The magnet was fiscal: the economic-zone incentive offered investors <b class="up">0% corporate tax for the first five years</b> of operation — a headline that has since become the memo's central controversy (§04).</p>
+      <p>Manufactured output is aimed at both the <b class="white">domestic</b> market and <b class="white">regional export</b>; cigarette and leaf exports earn the foreign currency that makes the sector attractive to the finance ministry.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><span class="t">Manufacturing snapshot</span><span class="r">Lusaka South MFEZ</span></div>
+    <table>
+      <thead><tr><th>Operator</th><th>Listing</th><th>Facility</th><th class="num">Note</th></tr></thead>
+      <tbody>
+        <tr><td class="co">BAT Zambia</td><td><span class="cash">LuSE: BATZ</span></td><td>USD 25M+ hub, Lusaka South MFEZ</td><td class="num">Dunhill / Rothmans / Pall Mall</td></tr>
+        <tr><td class="co">Roland Imperial Tobacco</td><td class="dim">private</td><td>MFEZ manufacturing plant</td><td class="num">opened 2018</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 03 GROWING -->
+<section>
+  <div class="sec-h"><span class="no">03</span><h2>Growing the leaf — a small slice</h2></div>
+  <p class="lede dim">Zambia grows both flue-cured (Virginia) and burley tobacco as a cash crop — but it is a modest share of the agricultural economy and of rural employment.</p>
+  <div class="tiles">
+    <div class="tile leaf"><div class="n">36,136<span class="u"> t</span></div><div class="l">Tobacco produced, 2023</div></div>
+    <div class="tile"><div class="n">20,446<span class="u"> ha</span></div><div class="l">Land under tobacco, 2023</div></div>
+    <div class="tile"><div class="n">0.5<span class="u">%</span></div><div class="l">Share of small/medium farmers employed (MoH, 2019)</div></div>
+    <div class="tile up"><div class="n">+6.5<span class="u">%</span></div><div class="l">Projected market CAGR, 2026–2032</div></div>
+  </div>
+  <div class="prose" style="margin-top:18px">
+    <p class="dim">Zambia's own Ministry of Health noted in 2019 that tobacco represents only a small percentage of total agricultural exports and employs only ~<b class="white">0.5%</b> of small and medium-scale farmers — a figure that undercuts the "tobacco = rural jobs" argument often used to defend the incentives. Much of the leaf, and some manufactured product, is exported; those hard-currency earnings are the pull.<sup>4,5,6</sup></p>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><span class="t">Leaf vs. sticks — the two-sided sector</span><span class="r">Directional</span></div>
+    <div style="padding:16px 14px 6px">
+      <div class="bar-row"><span class="lab leaf">Leaf output '23</span><div class="bar-track"><div class="bar-fill" style="width:72%;background:var(--leaf)"></div></div><span class="val">36,136 t</span></div>
+      <div class="bar-row"><span class="lab">Land '23</span><div class="bar-track"><div class="bar-fill" style="width:41%;background:var(--txt-2)"></div></div><span class="val">20,446 ha</span></div>
+      <div class="bar-row"><span class="lab up">Farmer share</span><div class="bar-track"><div class="bar-fill" style="width:2%;background:var(--up)"></div></div><span class="val">0.5%</span></div>
+      <div class="bar-row"><span class="lab amber">Mfg capacity</span><div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--amber)"></div></div><span class="val">20M+/d</span></div>
+    </div>
+    <div style="padding:4px 14px 14px;font-size:11px;color:var(--txt-3)">Bars are scaled independently for legibility, not to a shared axis — they compare shape, not magnitude.</div>
+  </div>
+</section>
+
+<!-- 04 POLICY -->
+<section>
+  <div class="sec-h"><span class="no">04</span><h2>The controversy: policy incoherence</h2></div>
+  <p class="lede big">This is the most cited part of the Zambia story — and the most analytically interesting.</p>
+  <div class="prose">
+    <p class="dim">Zambia is a party to the WHO <b class="white">Framework Convention on Tobacco Control (FCTC)</b>, which commits it to <b class="white">reducing</b> tobacco use. Yet its investment and tax policy — the <b class="white">MFEZ 0% tax holiday</b> — simultaneously <b class="white">subsidised</b> tobacco manufacturing. Researchers describe this as textbook <b class="amber">"policy incoherence"</b>: the health ministry works to curb tobacco while the finance/investment side gives away revenue to expand its production, chasing export foreign exchange.</p>
+  </div>
+  <div class="grid2" style="margin-top:6px">
+    <div class="call">
+      <div class="h">▲ The case for (finance / investment)</div>
+      <p class="dim">FDI, a modern manufacturing hub, export earnings in hard currency, and the incentive was offered to all zone investors — not tobacco-specific.</p>
+    </div>
+    <div class="call flag">
+      <div class="h">▼ The case against (health / fiscal)</div>
+      <p class="dim">Foregone tax revenue, expanded supply of a harmful product, contradiction with FCTC commitments, and thin employment upside (~0.5% of SME farmers).</p>
+    </div>
+  </div>
+  <div class="call">
+    <div class="h">◆ Mutambo read</div>
+    <p>The Zambia case is used internationally as a <b class="white">cautionary tale</b> on tax incentives for cigarette makers. The tension is structural: export FX and factory optics on one side, public-health treaty obligations and foregone revenue on the other. It is a governance/coherence problem more than a market one.<sup>4,5,7</sup></p>
+  </div>
+</section>
+
+<!-- 05 OUTLOOK + WATCHLIST -->
+<section>
+  <div class="sec-h"><span class="no">05</span><h2>Outlook &amp; watch-items</h2></div>
+  <div class="panel">
+    <div class="panel-h"><span class="t">Watchlist</span><span class="r">What moves the number</span></div>
+    <table>
+      <thead><tr><th>Item</th><th>Why it matters</th><th class="num">Signal</th></tr></thead>
+      <tbody>
+        <tr><td class="co">Market growth</td><td>Zambia tobacco market projected CAGR 2026–2032</td><td class="num up">+6.5%</td></tr>
+        <tr><td class="co">Tax-holiday expiry</td><td>End of the 5-yr 0% window reshapes plant economics</td><td class="num amber">FISCAL</td></tr>
+        <tr><td class="co">FCTC / excise policy</td><td>Health-side tightening vs. investment-side incentives</td><td class="num down">TENSION</td></tr>
+        <tr><td class="co">Regional export demand</td><td>DRC &amp; regional pull for MFEZ output + leaf</td><td class="num cash">FX</td></tr>
+        <tr><td class="co">Illicit trade</td><td>Common counterweight to formal-market volume in the region</td><td class="num dim">MONITOR</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="dim" style="font-size:12px">Growth projection is a third-party market forecast; treat as directional. Excise, illicit-trade and expiry lines are analytical watch-items, not quantified here.</p>
+</section>
+
+<!-- SOURCES -->
+<section>
+  <div class="sec-h"><span class="no">✦</span><h2>Sources &amp; notes</h2></div>
+  <ol class="srcs">
+    <li>Wikipedia — <a href="https://en.wikipedia.org/wiki/Rembrandt_Group">Rembrandt Group</a> (Anton Rupert; tobacco origin).</li>
+    <li>Wikipedia — <a href="https://en.wikipedia.org/wiki/Rothmans_International">Rothmans International</a> (Rothmans → BAT, 1999, ~USD 7.5B).</li>
+    <li>Wikipedia — <a href="https://en.wikipedia.org/wiki/Oppenheimer_family">Oppenheimer family</a> (Anglo American / De Beers — for contrast, no tobacco).</li>
+    <li>The Conversation — <a href="https://theconversation.com/cautionary-tale-of-tax-incentives-for-cigarette-makers-from-zambia-117429">Cautionary tale of tax incentives for cigarette makers from Zambia</a>.</li>
+    <li>PMC / BMJ — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7063566/">Consequences of policy incoherence: how Zambia's post-FCTC investment policy stimulated tobacco production</a>.</li>
+    <li>Tobacco Atlas — <a href="https://tobaccoatlas.org/factsheets/zambia/">Zambia factsheet</a>; Tobacco Tactics — <a href="https://www.tobaccotactics.org/article/zambia-country-profile/">Zambia country profile</a> (leaf output 36,136 t / 20,446 ha; MoH 0.5% figure; MFEZ hub &amp; brands).</li>
+    <li>6Wresearch — <a href="https://www.6wresearch.com/industry-report/zambia-tobacco-market">Zambia Tobacco Market outlook</a> (CAGR ~6.5%, 2026–2032).</li>
+  </ol>
+  <p class="disc">Independent research memo, not investment advice or a government document. Manufacturing, leaf and policy figures are drawn from the cited public sources; the market-growth CAGR is a third-party forecast. The Rupert-holdings table is orientation only — current shareholdings change with disposals. The "Oppenheimer cigarette business" premise is addressed as a correction: no such business exists; the tobacco lineage is the Rupert family's. Prepared September 2026, Mutambo Research.</p>
+</section>
+
+<div class="foot">MUTAMBO RESEARCH · ZAMBIA TOBACCO MEMO · RUPERT ≠ OPPENHEIMER · SEPT 2026</div>
+
+</main>
+</body>
+</html>
